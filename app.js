@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const mongoose = require('mongoose');
-const p = 'mongodb+srv://Leo:QYH7809ABC@cluster0.bkxswvb.mongodb.net/';
+const p = 'mongodb+srv://2623150077:QYH7809ABC@cluster0.ydpxn5y.mongodb.net/?retryWrites=true&w=majority';
 
 const session = require('express-session');
 const passport = require('passport');
@@ -10,30 +10,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('./models/user');
 const Post = require('./models/post');
-
-const EventEmitter = require('events');
-
-const emitter = new EventEmitter();
-
-// Increase the maximum number of event listeners for the emitter object
-emitter.setMaxListeners(20);
-
-// Add event listeners to the emitter object
-emitter.on('event1', () => {
-  // Event handler code
-});
-
-emitter.on('event2', () => {
-  // Event handler code
-});
-
-// ...
-// Other event listener attachments
-// ...
-
-// Make sure to remove event listeners when they are no longer needed
-emitter.off('event2', listener); // Example of removing an event listener
-
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
