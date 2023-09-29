@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "emitter": "^0.0.5",
+    "nodemon": "^3.0.1",
+    "passport": "^0.6.0"
+  }
+}

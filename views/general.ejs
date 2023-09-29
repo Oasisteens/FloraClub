@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>General</title>
+    <style>
+        h1 {
+    font-size: 20px;
+    position: relative;
+    left: 10px;
+    color: aliceblue;
+}
+
+body {
+    margin: 0;
+    margin-top: 50px;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    height: 170%;
+    position: relative;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 150%;
+    width: 100%;
+    background: url('2.png') no-repeat;
+    background-position: top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.hidden {
+    display: none;
+}
+
+#title {
+    position: relative;
+    left: 20px;
+}
+
+#topBar {
+    padding: 5px 0; /* Adjust the padding */
+    width: 100%;
+    background-color: #282828;
+    color: rgb(180, 171, 171);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#inputBox {
+    position: fixed;
+    top: 200px;
+    left: 750px;
+    width: 40%;
+    background-color: rgb(216, 207, 207);
+    padding: 20px;
+    box-shadow: 0px -2px 5px black;
+    border-radius: 20px;
+}
+
+.posts {
+    border: white solid 2px;
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    width: 600px;
+    margin: 10px;
+    border-radius: 26px;
+    background-color: white;
+    color: black;
+    opacity: 1;
+    position: relative;
+    left: 30px;
+}
+
+#spacing {
+    height: 200px;
+}
+
+#addPostBtn {
+    position: relative;
+    left: 800px;
+    top: 55px;
+}
+
+#closeForm {
+    position: relative;
+    left:550px;
+}
+    </style>
+
+
+    <head>
+        <div id="topBar">
+            <h1 id="title">Oasis</h1>
+        </div>
+        <link rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <button id="addPostBtn">Write a post</button>
+        </div>
+        <div id="inputBox" class="hidden">
+            <button id="closeForm">X</button>
+            <form action="/general" method="POST" id="postForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <br><br>
+                <label for="content">Write sth: </label>
+                <textarea id="content" name="content" required></textarea>
+                <input type="hidden" value="general" name="group">
+                <!-- Make sure 'username' is defined and passed to the template -->
+                <input type="hidden" value="<%= username %>" name="username">
+                <br><br>
+                <button>Post</button>
+            </form>
+            </div>
+        <div class="bg">
+            <div id="posts" class="word-box">
+                <% reversedPosts.forEach(post => { %>
+                    <br>
+                    <div class="posts">
+                    <h3><%= post.title %></h3>
+                    <p><%= post.content %></p>
+                    <p>posted by <%= post.username %></p>
+                    
+                    <br><br><br>
+                    <div>
+                        <p>posted on <%= post.postingtime %></p>
+                    </div>
+                    
+                    
+                    <% if(post.username === username && username != 'admin1' && username != 'Admin') { %>
+                        <form action="/generalDeletePost" method="POST" id="deletePost">
+                            <input type="hidden" name="postId" value="<%= post.id %>"> <!-- Assuming each post has an ID -->
+                            <button>Delete Post</button>
+                        </form>
+                    <% } if(username == 'admin1' || username == 'Admin') {%>
+                        <form action="/generalDeletePost" method="POST" id="deletePost">
+                        <input type="hidden" name="postId" value="<%= post.id %>"> <!-- Assuming each post has an ID -->
+                        <button>Admin Delete</button>
+                    </form> 
+                    <% }%>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+        <script>
+
+            document.getElementById("addPostBtn").addEventListener("click", function() {
+                document.getElementById("inputBox").classList.remove("hidden")
+            })
+
+            document.getElementById("closeForm").addEventListener("click", function() {
+                document.getElementById("inputBox").classList.add("hidden")
+            })
+
+        </script>
+        <div id="spacing"></div>
+    </body>
+</html>
