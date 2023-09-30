@@ -21,7 +21,10 @@ const postSchema = new Schema ({
             return value.toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
         },
         immutable: true,
+    },
+    image: {
+        String
     }
-})
+});
 
 module.exports = mongoose.model('Post', postSchema);

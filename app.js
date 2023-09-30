@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
+const initRoutes = require("./routes");
 
 const mongoose = require('mongoose');
 const p = 'mongodb+srv://2623150077:QYH7809ABC@cluster0.ydpxn5y.mongodb.net/?retryWrites=true&w=majority';
@@ -10,6 +12,14 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('./models/user');
 const Post = require('./models/post');
+
+var corsOptions = {
+    origin: "http://localhost:8080"
+  };
+  
+  app.use(cors(corsOptions));
+  app.use(express.urlencoded({ extended: true }));
+  initRoutes(app);
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -47,8 +57,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('view engine', 'ejs');
-app.listen(8080, '0.0.0.0', () => {
-    console.log('Server is running on port 8080');
+app.listen(8080, () => {
+    console.log(`Server is running on port 8080`);
 });
 
 function checkAuthenticated(req, res, next) {
