@@ -5,51 +5,51 @@ body, h1, p {
     font-family: 'poppins',sans-serif;
   }
 body {
-    
-    background: url('intro.jpg')no-repeat;
-    background-position: top;
-    background-size: cover;
-    background-attachment: fixed;
+  background: url('intro.jpg')no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 h1 {
     text-align: center;
-    color: #358597
+    color: #01A66F;
+    font-size: 34px;
 }
 header {
-    background-color: rgba(51, 51, 51, 0.2);
+    background-color: rgba(51, 51, 51, 0.6);
     padding: 20px;
-    color: #F4A896;
+    color: #BDD99E;
 }
 nav {
-    background-color: rgba(160, 160, 160, 0.2);
+    background-color: rgba(32, 32, 32, 0.6);
     padding: 10px;
-    color: #F4A896;
+    color: #BDD99E;
 }
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    color:#F4A896;
+    color:#BDD99E;
 }
 nav ul li {
     display: inline-block;
     margin-right: 10px;
-    color:#F4A896;
+    color:#BDD99E;
 }
 .channel{
-    color:#F4A896;
+    color:#BDD99E;
     font-size: 20px;
 }
 section{
-    background-color: rgba(120, 120, 120, 0.2);
+    background-color: rgba(90, 90, 90, 0.6);
     padding: 20px;
     text-align: left;
-    color: #F4A896;
+    color: #BDD99E;
 }
 footer{
-    background-color: rgba(51, 51, 51, 0.2);
+    background-color: rgba(51, 51, 51, 0.6);
     padding: 20px;
-    color: #F4A896;
+    color: #75CE9F;
     text-align: center;
 }
 .sm a{
@@ -155,12 +155,12 @@ footer{
     transform: scale(1.5);
   }
   p{
-    color:#F4A896;
+    color:#BDD99E;
     text-align: left;
   }
   h2{
     text-align: center;
-    color:#358597;
+    color:#01A66F;
   }
   .index {
     display: flex;
@@ -177,7 +177,7 @@ footer{
   }
 
   .gradient-text {
-    background: linear-gradient(to right, #F4A896, #04a2f1);
+    background: linear-gradient(to right, #FFC06E, #01A66F);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     /* For Firefox */
@@ -199,7 +199,7 @@ footer{
   }
 
   .channel:hover {
-    background-color: rgba(300, 300, 300, 0.2);
+    background-color: rgba(300, 300, 300, 0.6);
     color: #fff;
   }
 
@@ -233,14 +233,43 @@ footer{
 }
 
 .block {
-    width: 200px;
+    width: 1500px;
     height: 150px;
     margin: 10px;
 }
 .icon{
   display: inline-block;
-  border: 2px solid #358597;
+  color:#f58f09;
+  border: 2px solid #BDD99E;
   border-radius: 10px;
   padding: 7px;
-  background-color: #358597;
+  background-color: #BDD99E;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-tab {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.search-tab input[type="text"] {
+  flex: 1;
+  border: none;
+  padding: 10px;
+}
+
+.search-tab button {
+  background-color: #fc8544;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
 }
