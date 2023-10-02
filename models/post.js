@@ -8,6 +8,7 @@ const postSchema = new Schema ({
     content: {
         type: String,
     },
+    imgUrl: {String},
     group: {
         type: String,
     },
@@ -22,9 +23,6 @@ const postSchema = new Schema ({
         },
         immutable: true,
     },
-    image: {
-        String
-    }
 });
 
 module.exports = mongoose.model('Post', postSchema);

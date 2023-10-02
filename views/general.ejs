@@ -104,7 +104,8 @@ html {
         </div>
         <div id="inputBox" class="hidden">
             <button id="closeForm">X</button>
-            <form action="/upload" method="POST" id="postForm" enctype="multipart/form-data>
+            <form>
+            <form action="/general" method="POST" id="postForm" enctype="multipart/form-data">
                 <label for="title">Name:</label>
                 <input type="text" id="title" name="title" required>
                 <br><br>
@@ -112,13 +113,14 @@ html {
                 <textarea id="content" name="content" required></textarea>
                 <br>
                 <br>
-                <label for="input-files">Image:</label>
-                <input type="file" name="file" id="input-files" class="form-control-file border"/>
+                <label for="imgUrl">Select Image:</label>
+                <input type="file" id="imgUrl" name="imgUrl">
                 <input type="hidden" value="general" name="group">
                 <!-- Make sure 'username' is defined and passed to the template -->
                 <input type="hidden" value="<%= username %>" name="username">
                 <br><br>
                 <button type="submit">Post</button>
+            </form>
             </form>
             </div>
         <div class="bg">
@@ -128,7 +130,8 @@ html {
                     <div class="posts">
                     <h3><%= post.title %></h3>
                     <p><%= post.content %></p>
-                    <img src="/general/<%= post.image %>" alt="Post Image">
+                    <h3>Image:</h3>
+                    <img src="imgUrl" alt="Post Image">
                     <p>posted by <%= post.username %></p>
                     
                     <br><br><br>
@@ -152,37 +155,15 @@ html {
                 <% }); %>
             </div>
         </div>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script>
 
             document.getElementById("addPostBtn").addEventListener("click", function() {
                 document.getElementById("inputBox").classList.remove("hidden")
-            })
+            });
 
             document.getElementById("closeForm").addEventListener("click", function() {
                 document.getElementById("inputBox").classList.add("hidden")
-            })
-            
-            $(document).ready(function() {
-        let imagesPreview = function(input, placeToInsertImagePreview) {
-          if (input.files) {
-            let filesAmount = input.files.length;
-            for (i = 0; i < filesAmount; i++) {
-              let reader = new FileReader();
-              reader.onload = function(event) {
-                $($.parseHTML("<img>"))
-                  .attr("src", event.target.result)
-                  .appendTo(placeToInsertImagePreview);
-              };
-              reader.readAsDataURL(input.files[i]);
-            }
-          }
-        };
-        $("#input-files").on("change", function() {
-          imagesPreview(this, "div.preview-images");
-        });
-      });
+            });
         </script>
         <div id="spacing"></div>
     </body>

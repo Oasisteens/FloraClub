@@ -1,25 +1,15 @@
+require("dotenv").config();
+const connection = require("./db");
 const express = require('express');
 const app = express();
-const cors = require("cors");
-const initRoutes = require("./routes");
-
-const mongoose = require('mongoose');
-const p = 'mongodb+srv://2623150077:QYH7809ABC@cluster0.ydpxn5y.mongodb.net/?retryWrites=true&w=majority';
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+
 const User = require('./models/user');
 const Post = require('./models/post');
-
-var corsOptions = {
-    origin: "http://localhost:8080"
-  };
-  
-  app.use(cors(corsOptions));
-  app.use(express.urlencoded({ extended: true }));
-  initRoutes(app);
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -49,7 +39,7 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret: 'floraclub',
+    secret: 'BIPHFlora',
     resave: false,
     saveUninitialized: false
 }));
@@ -74,17 +64,7 @@ function checkLoginAuthenticated(req, res, next) {
     }
     res.redirect('/dashboard');
 }
-
-mongoose.connect(p, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch(error => {
-        console.error('Error connecting to MongoDB:', error);
-    });
-
-app.use(express.static('public'));
-
+connection();
 
 app.get('/register', (req, res) => {
     if (req.isAuthenticated()) {
