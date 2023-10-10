@@ -47,7 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('view engine', 'ejs');
-app.listen(8080, () => {
+app.listen(8080, '0.0.0.0', () => {
     console.log(`Server is running on port 8080`);
 });
 
