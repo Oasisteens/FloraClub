@@ -65,6 +65,7 @@ function checkLoginAuthenticated(req, res, next) {
     res.redirect('/dashboard');
 }
 connection();
+app.use(express.static('public'));
 
 app.get('/register', (req, res) => {
     if (req.isAuthenticated()) {
