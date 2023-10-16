@@ -1,7 +1,8 @@
 require("dotenv").config();
-const connection = require("./db");
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+const DB = "mongodb+srv://2623150077:QYH7809ABC@cluster0.ydpxn5y.mongodb.net/?retryWrites=true&w=majority";
 
 const session = require('express-session');
 const passport = require('passport');
@@ -64,7 +65,13 @@ function checkLoginAuthenticated(req, res, next) {
     }
     res.redirect('/dashboard');
 }
-connection();
+mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch(error => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 app.use(express.static('public'));
 
 app.get('/register', (req, res) => {
