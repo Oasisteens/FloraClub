@@ -1,4 +1,4 @@
-const upload = require("../middleware/upload");
+const upload = require("../models/upload");
 const dbConfig = require("../config/db");
 
 const MongoClient = require("mongodb").MongoClient;
