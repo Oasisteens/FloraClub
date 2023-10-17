@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 
 const app = express();
-const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb://yihaoqin:qyh7809abc@ac-keqjbbu-shard-00-00.6enxioa.mongodb.net:27017,ac-keqjbbu-shard-00-01.6enxioa.mongodb.net:27017,ac-keqjbbu-shard-00-02.6enxioa.mongodb.net:27017/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const session = require('express-session');
 const passport = require('passport');
@@ -11,6 +11,14 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 const User = require('./models/user');
+
+mongoose.connect(DB)
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch(error => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 
 
 
@@ -59,18 +67,11 @@ app.listen(3000, '0.0.0.0', () => {
     console.log(`Server is running on http`);
 });
 
-mongoose.connect(DB, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch(error => {
-        console.error('Error connecting to MongoDB:', error);
-    });
 app.use(express.static('public'));
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.status(404).render('404');
-})
+})*/
 
 
 

@@ -3,21 +3,8 @@ const multer = require("multer");
 const { GridFsStorage } = require("multer-gridfs-storage");
 const dbConfig = require("../config/db");
 
-const uri = require('mongodb-uri');
-const connectionString = uri.format({
-  scheme: 'mongodb',
-  hosts: [{ host: dbConfig.url }],
-  options: {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    // Any additional connection options
-  },
-  database: dbConfig.database
-});
-
 var storage = new GridFsStorage({
-  url: connectionString,
-  options: { useNewUrlParser: true, useUnifiedTopology: true },
+  url: dbConfig.url + dbConfig.database + "/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority",
   file: (req, file) => {
     const match = ["image/png", "image/jpeg"];
 

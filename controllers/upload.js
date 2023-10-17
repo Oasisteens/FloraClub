@@ -4,7 +4,7 @@ const dbConfig = require("../config/db");
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
 
-const url = dbConfig.url;
+const url = dbConfig.url + "/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const baseUrl = "http://127.0.0.1:8080/files/";
 
@@ -42,14 +42,14 @@ const getListFiles = async (req, res) => {
 
     const cursor = images.find({});
 
-    if ((await cursor.count()) === 0) {
+    if ((await cursor.countDocuments()) === 0) {
       return res.status(500).send({
         message: "No files found!",
       });
     }
 
     let fileInfos = [];
-    await cursor.forEach((doc) => {
+    cursor.map((doc) => {
       fileInfos.push({
         name: doc.filename,
         url: baseUrl + doc.filename,
