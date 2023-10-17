@@ -4,8 +4,20 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 const dbConfig = require("../config/db");
 src="https://code.jquery.com/jquery-3.6.0.min.js";
 
+const uri = require('mongodb-uri');
+const connectionString = uri.format({
+  scheme: 'mongodb',
+  hosts: [{ host: dbConfig.url }],
+  options: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // Any additional connection options
+  },
+  database: dbConfig.database
+});
+
 var storage = new GridFsStorage({
-  url: dbConfig.url,
+  url: connectionString,
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
     const match = ["image/png", "image/jpeg"];
