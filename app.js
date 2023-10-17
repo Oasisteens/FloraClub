@@ -6,3 +6,6 @@ const mongooseLink = 'mongodb+srv://jess:jess@cluster0.cgg9ypb.mongodb.net/?retr
 
 const session = require('express-session');
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+const bodyParser = require('body-parser')
