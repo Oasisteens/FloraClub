@@ -3,3 +3,4 @@ module.exports = {
     database: "filesys",
     imgBucket: "photos",
   };
+//ac-keqjbbu-shard-00-01.6enxioa.mongodb.net:27017
