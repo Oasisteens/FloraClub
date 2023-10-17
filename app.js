@@ -1,4 +1,4 @@
-const cors = require("cors");
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -10,9 +10,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 const User = require('./models/user');
-const Post = require('./models/post');
 
-const initRoutes = require("./routes");
+
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -37,15 +36,10 @@ passport.deserializeUser(async (id, done) => {
         done(null, user);
     } catch(error) {
         done(error);
-    }
-})
-var corsOptions = {
-    origin: "http://127.0.0.1:8080"
-  };
-  
-app.use(cors(corsOptions));
+    }})
+
 app.use(express.urlencoded({ extended: true }));
-initRoutes(app);
+
 app.use(session({
     secret: 'BIPHFlora',
     resave: false,
@@ -82,82 +76,38 @@ mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology:
 app.use(express.static('public'));
 
 app.get('/register', (req, res) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/dashboard');
-    }
     res.render('register')
 })
 
 app.post('/register', async (req, res) => {
-    console.log(req.body);  // Log the received data
-
     try {
         if (!req.body.username || !req.body.password) {
             return res.status(400).send('Username or password missing');
         }
-
-        const user = new User(req.body);
+        const adminCode = req.body.adminCode
+        let adminStatus = false
+        if (adminCode == 'Flora1234') {adminStatus = true}
+        const user = new User({username: req.body.username, password: req.body.password, admin: adminStatus});
         await user.save();
         res.redirect('/login');
     } catch (error) {
         console.error('Error during registration:', error.message);
         res.status(500).send('Internal server error');
     }
-});
+})
 
-
-
-
-app.get('/login', (req, res) => {
+app.get('/login', async (req, res) => {
     const ip_address = req.ip || req.connection.remoteAddress;
-    console.log(ip_address);
     if (req.isAuthenticated()) {
         return res.redirect('/dashboard');
     }
     res.render('login');
-});
-
+})
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: 'dashboard',
-    failureRedirect: '/login'
-}));
-
-app.get('/dashboard', checkAuthenticated, (req, res) => {
-    res.render('dashboard', {username: req.user.username})
-})
-
-app.get('/',async (req, res) => {
-    res.render('intro');
-})
-
-app.get('/general', checkAuthenticated, async (req, res) => {
-    const generalPosts = await Post.find({ group: 'general' });
-    const reversedPosts = generalPosts.reverse();
-    res.render('general', { reversedPosts, username: req.user.username });
-})
-
-
-app.post('/general', (req, res) => {
-    const post = new Post(req.body);
-    post.save().then((result) => {
-        res.redirect('/general')
-    })
-});
-
-app.post('/generalDeletePost', async (req, res) => {
-    console.log('Post delete invoked' )
-    console.log(req.body.postId)
-    const deleteId = req.body.postId;
-    try {
-        await Post.deleteOne({ _id: deleteId });
-        res.redirect('/general');
-    } catch (error) {
-        console.error('Error during post deletion:', error.message);
-        res.status(500).send('Internal server error');
-    }
-});
-
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+  }));
 
 app.use((req, res, next) => {
     res.status(404).render('404');
