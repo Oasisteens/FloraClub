@@ -1,6 +1,7 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require("cors");
+
 const app = express();
 const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
 
@@ -13,6 +14,11 @@ const User = require('./models/user');
 
 
 
+var corsOptions = {
+    origin: "http://127.0.0.1:8081"
+  };
+  
+app.use(cors(corsOptions));
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         try {
@@ -53,20 +59,7 @@ app.listen(3000, '0.0.0.0', () => {
     console.log(`Server is running on http`);
 });
 
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login')
-}
-
-function checkLoginAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/dashboard');
-}
-mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(DB, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('Connected to MongoDB');
     })
@@ -75,40 +68,31 @@ mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology:
     });
 app.use(express.static('public'));
 
-app.get('/register', (req, res) => {
-    res.render('register')
-})
-
-app.post('/register', async (req, res) => {
-    try {
-        if (!req.body.username || !req.body.password) {
-            return res.status(400).send('Username or password missing');
-        }
-        const adminCode = req.body.adminCode
-        let adminStatus = false
-        if (adminCode == 'Flora1234') {adminStatus = true}
-        const user = new User({username: req.body.username, password: req.body.password, admin: adminStatus});
-        await user.save();
-        res.redirect('/login');
-    } catch (error) {
-        console.error('Error during registration:', error.message);
-        res.status(500).send('Internal server error');
-    }
-})
-
-app.get('/login', async (req, res) => {
-    const ip_address = req.ip || req.connection.remoteAddress;
-    if (req.isAuthenticated()) {
-        return res.redirect('/dashboard');
-    }
-    res.render('login');
-})
-
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-  }));
-
 app.use((req, res, next) => {
     res.status(404).render('404');
 })
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+const initRoutes = require("./routes");
+
+app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
