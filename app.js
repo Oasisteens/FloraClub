@@ -1,16 +1,18 @@
-require("dotenv").config();
+const cors = require("cors");
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const DB = "mongodb+srv://2623150077:QYH7809ABC@cluster0.ydpxn5y.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
-const User = require('./models/user');
-const Post = require('./models/post');
+const User = require('./middleware/user');
+const Post = require('./middleware/post');
+
+const initRoutes = require("./routes");
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -37,8 +39,13 @@ passport.deserializeUser(async (id, done) => {
         done(error);
     }
 })
-
+var corsOptions = {
+    origin: "http://127.0.0.1:8080"
+  };
+  
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
 app.use(session({
     secret: 'BIPHFlora',
     resave: false,
@@ -65,7 +72,7 @@ function checkLoginAuthenticated(req, res, next) {
     }
     res.redirect('/dashboard');
 }
-mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('Connected to MongoDB');
     })
