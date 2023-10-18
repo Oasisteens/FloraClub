@@ -16,10 +16,6 @@ const initRoutes = require("./routes");
 
 const User = require('./models/user');
 
- 
-
- 
-
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         try {
@@ -154,5 +150,4 @@ app.use((req, res, next) => {
 
 
 
-app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
