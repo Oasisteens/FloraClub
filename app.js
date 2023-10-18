@@ -1,15 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
-initRoutes(app);
+const DB = "mongodb://Flora:flora@112.74.58.221:27017/";
 
  
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const initRoutes = require("../routes");
+const initRoutes = require("./routes");
 
 initRoutes(app);
 
