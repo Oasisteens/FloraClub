@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const DB = "mongodb://Flora:flora@112.74.58.221:27017/";
+const cors = require("cors");
+var corsOptions = {
+    origin: "http://112.74.58.221:9001"
+  };
 
  
 
@@ -10,7 +14,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const initRoutes = require("./routes");
 
-initRoutes(app);
 
  
 
@@ -44,8 +47,9 @@ passport.deserializeUser(async (id, done) => {
     }})
 
  
-
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
 
  
 
