@@ -1,32 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require("cors");
-
 const app = express();
-const DB = "mongodb://yihaoqin:qyh7809abc@ac-keqjbbu-shard-00-00.6enxioa.mongodb.net:27017,ac-keqjbbu-shard-00-01.6enxioa.mongodb.net:27017,ac-keqjbbu-shard-00-02.6enxioa.mongodb.net:27017/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority";
+const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
+
+ 
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-//hiii
+const initRoutes = require("./routes");
+
+ 
+
+ 
 
 const User = require('./models/user');
 
-mongoose.connect(DB)
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch(error => {
-        console.error('Error connecting to MongoDB:', error);
-    });
+ 
 
+ 
 
-
-var corsOptions = {
-    origin: "http://127.0.0.1:8081"
-  };
-  
-app.use(cors(corsOptions));
 passport.use(new LocalStrategy(
     async (username, password, done) => {
         try {
@@ -41,6 +34,8 @@ passport.use(new LocalStrategy(
     }
 ));
 
+ 
+
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
@@ -52,13 +47,19 @@ passport.deserializeUser(async (id, done) => {
         done(error);
     }})
 
+ 
+
 app.use(express.urlencoded({ extended: true }));
+
+ 
 
 app.use(session({
     secret: 'BIPHFlora',
     resave: false,
     saveUninitialized: false
 }));
+
+ 
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -67,11 +68,79 @@ app.listen(3000, '0.0.0.0', () => {
     console.log(`Server is running on http`);
 });
 
+ 
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login')
+}
+
+ 
+
+function checkLoginAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/dashboard');
+}
+mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch(error => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 app.use(express.static('public'));
 
-/*app.use((req, res, next) => {
+ 
+
+app.get('/register', (req, res) => {
+    res.render('register')
+})
+
+ 
+
+app.post('/register', async (req, res) => {
+    try {
+        if (!req.body.username || !req.body.password) {
+            return res.status(400).send('Username or password missing');
+        }
+        const adminCode = req.body.adminCode
+        let adminStatus = false
+        if (adminCode == 'Flora1234') {adminStatus = true}
+        const user = new User({username: req.body.username, password: req.body.password, admin: adminStatus});
+        await user.save();
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Error during registration:', error.message);
+        res.status(500).send('Internal server error');
+    }
+})
+
+ 
+
+app.get('/login', async (req, res) => {
+    const ip_address = req.ip || req.connection.remoteAddress;
+    if (req.isAuthenticated()) {
+        return res.redirect('/dashboard');
+    }
+    res.render('login');
+})
+
+ 
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+  }));
+
+ 
+
+app.use((req, res, next) => {
     res.status(404).render('404');
-})*/
+})
 
 
 
@@ -82,18 +151,8 @@ app.use(express.static('public'));
 
 
 
-/////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
-
-
-
-const initRoutes = require("./routes");
 
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
