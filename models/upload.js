@@ -4,7 +4,7 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 const dbConfig = require("../config/db");
 
 var storage = new GridFsStorage({
-  url: dbConfig.url + dbConfig.database + "/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority",
+  url: dbConfig.url + dbConfig.database,
   file: (req, file) => {
     const match = ["image/png", "image/jpeg"];
 

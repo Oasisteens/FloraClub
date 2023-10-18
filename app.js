@@ -2,15 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const DB = "mongodb+srv://yihaoqin:qyh7809abc@cluster0.6enxioa.mongodb.net/?retryWrites=true&w=majority";
+initRoutes(app);
 
  
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const initRoutes = require("./routes");
+const initRoutes = require("../routes");
 
- 
+initRoutes(app);
 
  
 
@@ -138,20 +139,6 @@ app.get('/homescreen', async (req, res) => {
 
  
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.status(404).render('404');
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-initRoutes(app);
+})*/

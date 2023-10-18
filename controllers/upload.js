@@ -6,7 +6,7 @@ const GridFSBucket = require("mongodb").GridFSBucket;
 
 const url = dbConfig.url + "/?ssl=true&replicaSet=atlas-5t4asc-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-const baseUrl = "http://127.0.0.1:8080/files/";
+const baseUrl = "http://112.74.58.221:9000/files/";
 
 const mongoClient = new MongoClient(url);
 
