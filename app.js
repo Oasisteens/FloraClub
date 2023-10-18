@@ -132,6 +132,10 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
   }));
 
+app.get('/homescreen', async (req, res) => {
+    res.render('homescreen')
+})
+
  
 
 app.use((req, res, next) => {
