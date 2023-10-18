@@ -120,7 +120,7 @@ app.post('/register', async (req, res) => {
 app.get('/login', async (req, res) => {
     const ip_address = req.ip || req.connection.remoteAddress;
     if (req.isAuthenticated()) {
-        return res.redirect('/dashboard');
+        return res.redirect('/homescreen');
     }
     res.render('login');
 })
@@ -128,7 +128,7 @@ app.get('/login', async (req, res) => {
  
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/homescreen',
     failureRedirect: '/login',
   }));
 
