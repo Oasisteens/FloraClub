@@ -1,18 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+const ObjectId = mongodb.ObjectId;
+const dbConfig = require("./config/db");
+const upload = require("./models/uploadfile");
 const app = express();
-const DB = "mongodb://Flora:flora@112.74.58.221:27017/";
-const cors = require("cors");
-var corsOptions = {
-    origin: "http://112.74.58.221:9001"
-  };
-
  
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const initRoutes = require("./routes");
 
 
  
@@ -46,10 +44,8 @@ passport.deserializeUser(async (id, done) => {
         done(error);
     }})
 
- 
-app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: true }));
-initRoutes(app);
 
  
 
@@ -85,7 +81,7 @@ function checkLoginAuthenticated(req, res, next) {
     }
     res.redirect('/dashboard');
 }
-mongoose.connect(DB, { w: 'majority', useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbConfig.url)
     .then(() => {
         console.log('Connected to MongoDB');
     })
@@ -139,6 +135,38 @@ app.post('/login', passport.authenticate('local', {
 app.get('/homescreen', async (req, res) => {
     res.render('homescreen')
 })
+
+app.get('/', async (req, res) => {
+    res.render('index')
+})
+
+app.post('/upload', upload.single('file'), function (req, res) {
+    const fileData = {
+      filename: req.file.filename,
+      originalname: req.file.originalname,
+      path: req.file.path,
+      size: req.file.size
+    };
+  
+    MongoClient.connect(dbConfig.url, function (err, client) {
+      if (err) {
+        console.log('Error connecting to the MongoDB server:', err);
+        res.status(500).send('An error occurred');
+      } else {
+        const db = client.db('file_upload');
+        db.collection(dbConfig.database).insertOne(fileData, function (err, result) {
+          if (err) {
+            console.log('Error inserting file details into MongoDB:', err);
+            res.status(500).send('An error occurred');
+          } else {
+            console.log('File uploaded and file details saved:', result);
+            res.status(200).send('File uploaded successfully');
+          }
+          client.close();
+        });
+      }
+    });
+  });
 
  
 
