@@ -147,26 +147,8 @@ app.post('/upload', upload.single('file'), function (req, res) {
       path: req.file.path,
       size: req.file.size
     };
-  
-    MongoClient.connect(dbConfig.url, function (err, client) {
-      if (err) {
-        console.log('Error connecting to the MongoDB server:', err);
-        res.status(500).send('An error occurred');
-      } else {
-        const db = client.db('file_upload');
-        db.collection(dbConfig.database).insertOne(fileData, function (err, result) {
-          if (err) {
-            console.log('Error inserting file details into MongoDB:', err);
-            res.status(500).send('An error occurred');
-          } else {
-            console.log('File uploaded and file details saved:', result);
-            res.status(200).send('File uploaded successfully');
-          }
-          client.close();
-        });
-      }
-    });
-  });
+});
+ 
 
  
 

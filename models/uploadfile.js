@@ -4,8 +4,12 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Set the destination folder for uploaded files
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-biphflora-' + file.originalname); // Set a unique filename for the uploaded file
-  }
+    const now = new Date();
+    const utc8Offset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+    const utc8Now = new Date(now.getTime() + utc8Offset);
+
+    cb(null, utc8Now.getTime() + '-biphflora-' + file.originalname);
+}
 });
 const upload = multer({ storage: storage });
 module.exports = upload;
