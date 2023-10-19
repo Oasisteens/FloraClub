@@ -18,9 +18,9 @@
         <div class="col-sm-8 mt-3">
           <h4>Node.js upload images</h4>
 
-          <form class="mt-4"
+          <form
             action="/upload"
-            method="openUploadStream"
+            method="POST"
             enctype="multipart/form-data"
           >
             <div class="form-group">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-
+<!--javascript for previewing the picture-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
       $(document).ready(function() {
@@ -65,5 +65,6 @@
         });
       });
     </script>
+<!--javascript for previewing the picture-->
   </body>
 </html>
