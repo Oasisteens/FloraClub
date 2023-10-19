@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const app = express();
 const DB = "mongodb://Flora:flora@112.74.58.221:27017/";
 const cors = require("cors");
-
 var corsOptions = {
     origin: "http://112.74.58.221:9001"
   };
