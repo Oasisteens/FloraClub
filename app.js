@@ -166,6 +166,10 @@ app.post('/upload', upload.single('file'), async function (req, res) {
     res.render('index', { username: req.body.username });
   });
 
+  app.get('/test', (req, res) => {
+    res.render('test')
+  })
+
  
 
 /*app.use((req, res, next) => {
