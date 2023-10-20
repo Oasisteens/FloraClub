@@ -16,6 +16,7 @@ const LocalStrategy = require('passport-local').Strategy;
  
 
 const User = require('./models/user');
+const Post = require('./models/post');
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -132,23 +133,38 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
   }));
 
-app.get('/homescreen', async (req, res) => {
+app.get('/homescreen', checkAuthenticated, async (req, res) => {
     res.render('homescreen')
 })
 
-app.get('/', async (req, res) => {
-    res.render('index')
+app.get('/',checkAuthenticated, async (req, res) => {
+    console.log(req.user.username)
+    res.render('index' , { username: req.user.username })
 })
 
-app.post('/upload', upload.single('file'), function (req, res) {
-    const fileData = {
-      filename: req.file.filename,
-      originalname: req.file.originalname,
-      path: req.file.path,
-      size: req.file.size
-    };
-});
- 
+app.post('/upload', upload.single('file'), async function (req, res) {
+    let fileData = null;
+  
+    if (req.file && req.file.filename !== null) {
+      fileData = {
+        filename: req.file.filename,
+        originalname: req.file.originalname,
+        path: req.file.path,
+        size: req.file.size
+      };
+    }
+  
+    const post = new Post({
+      featuredColumnTitle: req.body.featuredColumnTitle,
+      featuredColumnContent: req.body.featuredColumnContent,
+      featuredColumnCaptions: req.body.featuredColumnCaptions,
+      username: req.body.username
+    });
+
+    await post.save()
+  
+    res.render('index', { username: req.body.username });
+  });
 
  
 

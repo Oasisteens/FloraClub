@@ -24,13 +24,23 @@
             enctype="multipart/form-data"
           >
             <div class="form-group">
+
+              <input type="text" id="featuredColumnTitle" name="featuredColumnTitle" type="text">
+              <br>
+              <input type="text" id="featuredColumnContent" name="featuredColumnContent" type="text">
+              <br>
+              <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions" type="text">
+              <br>
               <input
                 type="file"
                 name="file"
                 id="input-files"
                 class="form-control-file border"
               />
+              <input type="hidden" id="username" name="username" value="<%= username %>">
             </div>
+
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

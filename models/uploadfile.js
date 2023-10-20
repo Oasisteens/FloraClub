@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     const utc8Offset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
     const utc8Now = new Date(now.getTime() + utc8Offset);
 
-    cb(null, utc8Now.getTime() + '-biphflora-' + file.originalname);
+    cb(null, 'biphflora-' + req.body.featuredColumnTitle + '-' + req.user.username );
 }
 });
 const upload = multer({ storage: storage });
