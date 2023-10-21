@@ -32,10 +32,12 @@
                         <td><%= user.username %> </td>
                         <td><%= user.password %></td>
                         <td><%= user.admin %></td>
-                        <td><form action='/deleteUser' method="POST" id="deleteUsernameForm">
+                        <div>
+                        <td><form action='/deleteUser' method="POST" class="deleteUsernameForm">
                             <input type="hidden" value="<%= user.username %>" name="username">
-                            <button type="submit">Delete</button></from></td>
-                        <td><form action='/toggleAdmin' method="POST" id="toggleAdminForm">
+                            <button type="submit">Delete</button></form></td></div>
+                    
+                        <td><form action='/toggleAdmin' method="POST" class="toggleAdminForm">
                             <input type="hidden" value="<%= user.username %>" name="username">
                             <button type="submit">Toggle</button></form></td>
                         
