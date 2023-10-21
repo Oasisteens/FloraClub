@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <style>
+            #userTable{
+                border: black solid;
+                border-collapse: collapse;
+            }
+            td {
+                border: black solid;
+            }
+            th {
+                border: black solid;
+            }
+
+            #POSTtABLE{
+                border: black solid;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <div type="account">
+            <h1>Account management:</h1>
+            <table id="userTable">
+                <th>Username</th>
+                <th>Password</th>
+                <th>Admin Status</th>
+                <th>Delete</th>
+                <th>Make Admin</th>
+                <% users.forEach(function(user) { %>
+                    <tr>
+                        <td><%= user.username %> </td>
+                        <td><%= user.password %></td>
+                        <td><%= user.admin %></td>
+                        <td><form action='/deleteUser' method="POST" id="deleteUsernameForm">
+                            <input type="hidden" value="<%= user.username %>" name="username">
+                            <button type="submit">Delete</button></from></td>
+                        <td><form action='/toggleAdmin' method="POST" id="toggleAdminForm">
+                            <input type="hidden" value="<%= user.username %>" name="username">
+                            <button type="submit">Toggle</button></form></td>
+                        
+                    </tr>
+                <% }) %>
+            </table>
+            <br><br>
+            <table id="postTable">
+                <tr>
+                <th>Topic</th>
+                <th>Delete</th>
+                <th>Feature</th>
+                </tr>
+
+                <% posts.forEach(function(post) { %>
+                    <tr>
+                        <td><%= post.featuredColumnTitle %></td>
+                        <td><form action='/deletePost' method="POST" id="deletePostForm">
+                            <input type="hidden" value="<%= post.id %>" name="postId">
+                            <button type="submit">Delete</button>
+                        </form>  </td>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+    </body>
+</html>
