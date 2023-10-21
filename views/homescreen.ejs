@@ -1,4 +1,4 @@
-<html lang="en">
+<!-- <html lang="en">
     <head>
         <title>Biph Flora</title>
         <style>
@@ -65,8 +65,9 @@
                     <div id="featuredColumnContent" class="featuredColumnContent"><%= post.featuredColumnContent %></div>
                     <div id="featuredColumnCaptions" class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
                     <div class="postlayout">
-                        <div class="picture"><img src="imagePath1"></div>
-                        <div class="picture"><img src="imagePath2"></div>
+                        <% post.pictures.forEach(function(picture) { %>
+                            <div class="picture"><img src="<%= picture %>"></div>
+                        <% }); %>
                     </div>
                     <button id="prevBtn">上一个</button>
                     <button id="nextBtn">下一个</button>
@@ -89,7 +90,7 @@
         </div>
         <script>
             const posts = "<%- JSON.stringify(posts) %>";
-        
+
             let currentIndex = 0;
             const recommendationContainer = document.getElementById("featuredColumn");
             const prevBtn = document.getElementById("prevBtn");
@@ -99,14 +100,15 @@
 
             function showRecommendation() {
                 const currentPost = parsedPosts[currentIndex];
-        
+
                 document.getElementById("featuredColumnTitle").innerHTML = currentPost.featuredColumnTitle;
                 document.getElementById("featuredColumnContent").innerHTML = currentPost.featuredColumnContent;
                 document.getElementById("featuredColumnCaptions").innerHTML = currentPost.featuredColumnCaptions;
-        
+
                 const imageElements = recommendationContainer.getElementsByClassName("picture");
-                imageElements[0].getElementsByTagName("img")[0].src = currentPost.imagePath1;
-                imageElements[1].getElementsByTagName("img")[0].src = currentPost.imagePath2;
+                for (let i = 0; i < currentPost.pictures.length; i++) {
+                    imageElements[i].getElementsByTagName("img")[0].src = currentPost.pictures[i];
+                }
             }
 
             prevBtn.addEventListener("click", function() {
@@ -128,4 +130,4 @@
             showRecommendation();
         </script>
     </body>
-</html>
+</html> -->

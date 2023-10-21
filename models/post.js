@@ -16,8 +16,10 @@ const postSchema = new Schema({
     },
     featured: {
         type: Boolean
+    },
+    pictures: {
+        type: Number
     }
-
 });
 
 module.exports = mongoose.model('Post', postSchema);

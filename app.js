@@ -4,13 +4,14 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const ObjectId = mongodb.ObjectId;
 const dbConfig = require("./config/db");
-const upload = require("./models/uploadfile");
+const uploadutils = require("./models/uploadfile");
 const app = express();
  
 
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const uploadmiddleware = uploadutils.upload.array('files');
 
 
  
@@ -148,33 +149,40 @@ app.get('/index',checkAuthenticated, async (req,res) =>{
     res.render('index' , { username: req.user.username });
 })
 
-app.post('/upload', upload.single('file'), async function (req, res) {
-    let fileData = null;
-  
-    if (req.file && req.file.filename !== null) {
-      fileData = {
-        filename: req.file.filename,
-        originalname: req.file.originalname,
-        path: req.file.path,
-        size: req.file.size
-      };
-    }
+app.post('/upload', uploadmiddleware, async function (req, res) {
+    let fileData = [];
     
-    if (req.body.featured == null || req.body.featured == false) {
-        var isFeatured = false;
-      } else {
-        var isFeatured = true;
+    if (req.files && req.files.length >= 1) {
+      for (let i = 0; i < req.files.length; i++) {
+        fileData.push({
+          filename: req.files[i].filename,
+          originalname: req.files[i].originalname,
+          path: req.files[i].path,
+          size: req.files[i].size
+        });
       }
-
+    }
+  
+    // Retrieve the file numbers
+    const fileNumbers = fileData.map(file => uploadutils.getFileNumber());
+  
+    if (req.body.featured == null || req.body.featured == false) {
+      var isFeatured = false;
+    } else {
+      var isFeatured = true;
+    }
+  
     const post = new Post({
       featuredColumnTitle: req.body.featuredColumnTitle,
       featuredColumnContent: req.body.featuredColumnContent,
       featuredColumnCaptions: req.body.featuredColumnCaptions,
       username: req.body.username,
-      featured: isFeatured
-    })
-
-    await post.save()
+      featured: isFeatured,
+      pictures: fileNumbers // Use the file numbers as the value for pictures array
+    });
+  
+    await post.save();
+    console.log(post.pictures)
   
     res.render('index', { username: req.body.username });
   });
