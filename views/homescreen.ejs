@@ -1,41 +1,67 @@
 <html lang="en">
+<head>
     <title>Biph Flora</title>
-    <head>
     <style>
-    #linkBar {
-        border-collapse: collapse;
-        border: 2px solid;
-    }
+        #linkBar {
+            border-collapse: collapse;
+            border: 2px solid;
+        }
 
-    a {
-        display: inline-block; 
-        border: 1px solid black;
-        padding: 10px 20px; 
-        margin: 0;
-    }
-</style>
-    </head>
+        a {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 10px 20px;
+            margin: 0;
+        }
+
+        #featuredColumn {
+            border: solid black 2px;
+            width: 80%;
+            height: 45%;
+            position: relative;
+        }
+    </style>
+</head>
+
 <body>
     <div id="topBar">
-      <h1>BIPH FLORA</h1>
-      <table id="linkBar">
-        <a class ="linkBarLink" href="home">Home</a>
-        <a class ="linkBarLink" href="databse">Database</a>
-        <a class ="linkBarLink" href="creation">Creation</a>
-        <a class ="linkBarLink" href="activities">Activities</a>
-        <a class ="linkBarLink" href="journey">Journey</a>
-        <a class ="linkBarLink" href="aboutUs">About us</a>
-        <a class ="linkBarLink" href="registration">Registration</a>
-      </table>
+        <h1>BIPH FLORA</h1>
+        <table id="linkBar">
+            <tr>
+                <td><a class="linkBarLink" href="home">Home</a></td>
+                <td><a class="linkBarLink" href="databse">Database</a></td>
+                <td><a class="linkBarLink" href="creation">Creation</a></td>
+                <td><a class="linkBarLink" href="activities">Activities</a></td>
+                <td><a class="linkBarLink" href="journey">Journey</a></td>
+                <td><a class="linkBarLink" href="aboutUs">About us</a></td>
+                <td><a class="linkBarLink" href="registration">Registration</a></td>
+            </tr>
+        </table>
     </div>
+
     <div id="featuredColumn">
-        <div id="featuredColumnTitle"></div>
-        <div id="featuredColumnContent"></div>
-        <div id="featuredColumnCaptions"></div>
+        <% posts.forEach(function(post) { %>
+            <%console.log(post) %>
+            <% pictureUrl = "public/uploads/biphflora-" + post.featuredColumnTitle + "-" + username %>
+            <% console.log(pictureUrl) %>
+            <div class="posts">
+                <div id="featuredColumnTitle" class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
+                <div id="featuredColumnContent" class="featuredColumnContent"><%= post.featuredColumnContent %></div>
+                <div id="featuredColumnCaptions" class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
+                <div id="picture" class="picture"><img src="./uploads/biphflora-t-trial.png"></div>
+            </div>
+        <% }); %>
     </div>
+ 
+
     <div id="bottomHalf">
         <h1>Database for campus species 校内植物检索数据库</h1>
-        <div id="searchBar"></div>
+        <div id="searchBar">
+            <form method="POST" action="/searchResults">
+                <input type="text" name="topic">
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <h3># of Plant species inside of our campus</h3>
         <h3></h3>
         <h3># of Plant species recorded inside the database</h3>

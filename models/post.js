@@ -14,6 +14,9 @@ const postSchema = new Schema({
     username: {
         type: String
     },
+    featured: {
+        type: Boolean
+    }
 
 });
 

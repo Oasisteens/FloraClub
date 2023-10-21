@@ -134,7 +134,8 @@ app.post('/login', passport.authenticate('local', {
   }));
 
 app.get('/homescreen', checkAuthenticated, async (req, res) => {
-    res.render('homescreen')
+    const posts = await Post.find()
+    res.render('homescreen', {username: req.user.username, posts})
 })
 
 app.get('/',checkAuthenticated, async (req, res) => {
@@ -153,18 +154,29 @@ app.post('/upload', upload.single('file'), async function (req, res) {
         size: req.file.size
       };
     }
-  
+    
+    if (req.body.featured == null || req.body.featured == false) {
+        var isFeatured = false;
+      } else {
+        var isFeatured = true;
+      }
+
     const post = new Post({
       featuredColumnTitle: req.body.featuredColumnTitle,
       featuredColumnContent: req.body.featuredColumnContent,
       featuredColumnCaptions: req.body.featuredColumnCaptions,
-      username: req.body.username
-    });
+      username: req.body.username,
+      featured: isFeatured
+    })
 
     await post.save()
   
     res.render('index', { username: req.body.username });
   });
+
+  app.post('/searchResults', async (req, res) => {
+    res.render('searchResults')
+  })
 
   app.get('/test', (req, res) => {
     res.render('test')
