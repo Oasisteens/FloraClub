@@ -1,74 +1,131 @@
 <html lang="en">
-<head>
-    <title>Biph Flora</title>
-    <style>
-        #linkBar {
-            border-collapse: collapse;
-            border: 2px solid;
-            padding: 0px;
-            margin: 0px;
-        }
+    <head>
+        <title>Biph Flora</title>
+        <style>
+            .links{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            h1{
+                text-align: center;
+            }
 
-        a {
-            display: inline-block;
-            border: 1px solid black;
-            padding: 10px 20px;
-            margin: 0;
-        }
+            #linkBar {
+                border-collapse: collapse;
+                border: 2px solid;
+            }
 
-        #featuredColumn {
-            border: solid black 2px;
-            width: 80%;
-            height: 45%;
-            position: relative;
-        }
-    </style>
-</head>
+            a {
+                display: inline-block;
+                border: 1px solid black;
+                padding: 10px 20px;
+                margin: 0;
+            }
 
-<body>
-    <div id="topBar">
-        <h1>BIPH FLORA</h1>
-        <table id="linkBar">
-            <tr>
-                <td><a class="linkBarLink" href="home">Home</a></td>
-                <td><a class="linkBarLink" href="databse">Database</a></td>
-                <td><a class="linkBarLink" href="creation">Creation</a></td>
-                <td><a class="linkBarLink" href="activities">Activities</a></td>
-                <td><a class="linkBarLink" href="journey">Journey</a></td>
-                <td><a class="linkBarLink" href="aboutUs">About us</a></td>
-                <td><a class="linkBarLink" href="registration">Registration</a></td>
-            </tr>
-        </table>
-    </div>
-    <br>
+            #featuredColumn {
+                border: solid black 2px;
+                height: 40%;
+                position: relative;
+                width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-    <div id="featuredColumn">
-        <% posts.forEach(function(post) { %>
-            <%console.log(post) %>
-            <% pictureUrl = "public/uploads/biphflora-" + post.featuredColumnTitle + "-" + username %>
-            <% console.log(pictureUrl) %>
-            <div class="posts">
-                <div id="featuredColumnTitle" class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
-                <div id="featuredColumnContent" class="featuredColumnContent"><%= post.featuredColumnContent %></div>
-                <div id="featuredColumnCaptions" class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
-                <div id="picture" class="picture"><img src="./uploads/biphflora-t-trial.png"></div>
+            .postlayout{
+                display: flex;
+                justify-content: center;
+                align-items: center
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="topBar">
+            <h1>BIPH FLORA</h1>
+            <div class="links">
+                <table id="linkBar">
+                    <tr>
+                        <td><a class="linkBarLink" href="home">Home</a></td>
+                        <td><a class="linkBarLink" href="databse">Database</a></td>
+                        <td><a class="linkBarLink" href="creation">Creation</a></td>
+                        <td><a class="linkBarLink" href="activities">Activities</a></td>
+                        <td><a class="linkBarLink" href="journey">Journey</a></td>
+                        <td><a class="linkBarLink" href="aboutUs">About us</a></td>
+                        <td><a class="linkBarLink" href="registration">Registration</a></td>
+                    </tr>
+                </table>
             </div>
-        <% }); %>
-    </div>
- 
-
-    <div id="bottomHalf">
-        <h1>Database for campus species 校内植物检索数据库</h1>
-        <div id="searchBar">
-            <form method="POST" action="/searchResults">
-                <input type="text" name="topic">
-                <button type="submit">Search</button>
-            </form>
         </div>
-        <h3># of Plant species inside of our campus</h3>
-        <h3></h3>
-        <h3># of Plant species recorded inside the database</h3>
-        <a href="showFullList">Show full list</a>
-    </div>
-</body>
+        <br>
+        <div id="featuredColumn">
+            <% posts.forEach(function(post) { %>
+                <div class="posts">
+                    <div id="featuredColumnTitle" class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
+                    <div id="featuredColumnContent" class="featuredColumnContent"><%= post.featuredColumnContent %></div>
+                    <div id="featuredColumnCaptions" class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
+                    <div class="postlayout">
+                        <div class="picture"><img src="imagePath1"></div>
+                        <div class="picture"><img src="imagePath2"></div>
+                    </div>
+                    <button id="prevBtn">上一个</button>
+                    <button id="nextBtn">下一个</button>
+                </div>
+            <% }); %>
+        </div>
+
+        <div id="bottomHalf">
+            <h1>Database for campus species 校内植物检索数据库</h1>
+            <div id="searchBar">
+                <form method="POST" action="/searchResults">
+                    <input type="text" name="topic">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <h3># of Plant species inside of our campus</h3>
+            <h3></h3>
+            <h3># of Plant species recorded inside the database</h3>
+            <a href="showFullList">Show full list</a>
+        </div>
+        <script>
+            const posts = "<%- JSON.stringify(posts) %>";
+        
+            let currentIndex = 0;
+            const recommendationContainer = document.getElementById("featuredColumn");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+
+            const parsedPosts = JSON.parse(posts);
+
+            function showRecommendation() {
+                const currentPost = parsedPosts[currentIndex];
+        
+                document.getElementById("featuredColumnTitle").innerHTML = currentPost.featuredColumnTitle;
+                document.getElementById("featuredColumnContent").innerHTML = currentPost.featuredColumnContent;
+                document.getElementById("featuredColumnCaptions").innerHTML = currentPost.featuredColumnCaptions;
+        
+                const imageElements = recommendationContainer.getElementsByClassName("picture");
+                imageElements[0].getElementsByTagName("img")[0].src = currentPost.imagePath1;
+                imageElements[1].getElementsByTagName("img")[0].src = currentPost.imagePath2;
+            }
+
+            prevBtn.addEventListener("click", function() {
+                currentIndex--;
+                if (currentIndex < 0) {
+                    currentIndex = parsedPosts.length - 1;
+                }
+                showRecommendation();
+            });
+
+            nextBtn.addEventListener("click", function() {
+                currentIndex++;
+                if (currentIndex >= parsedPosts.length) {
+                    currentIndex = 0;
+                }
+                showRecommendation();
+            });
+
+            showRecommendation();
+        </script>
+    </body>
 </html>

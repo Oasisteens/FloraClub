@@ -144,6 +144,10 @@ app.get('/',checkAuthenticated, async (req, res) => {
     res.render('index' , { username: req.user.username })
 })
 
+app.get('/index',checkAuthenticated, async (req,res) =>{
+    res.render('index' , { username: req.user.username });
+})
+
 app.post('/upload', upload.single('file'), async function (req, res) {
     let fileData = null;
   
@@ -153,7 +157,7 @@ app.post('/upload', upload.single('file'), async function (req, res) {
         originalname: req.file.originalname,
         path: req.file.path,
         size: req.file.size
-      };chec
+      };
     }
     
     if (req.body.featured == null || req.body.featured == false) {
@@ -203,16 +207,16 @@ app.post('/upload', upload.single('file'), async function (req, res) {
 
   app.post('/deleteUser', async (req, res) => {
     console.log('delete request');
-    await User.deleteOne({ username: req.body.username })
-    res.redirect('/admin')
+    await User.deleteOne({ username: req.body.username });
+    res.redirect('/admin');
   })
 
   app.post('/toggleAdmin', async (req, res) => {
-    const userToToggle = await User.findOne({ username: req.body.username })
-    userToToggle.admin = !userToToggle.admin
+    const userToToggle = await User.findOne({ username: req.body.username });
+    userToToggle.admin = !userToToggle.admin;
     await userToToggle.save();
     console.log('admin toggled');
-    res.redirect('/admin')
+    res.redirect('/admin');
   })
 
 /*app.use((req, res, next) => {
