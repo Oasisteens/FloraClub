@@ -11,7 +11,7 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const uploadmiddleware = uploadutils.upload.array('files');
+const uploadmiddleware = uploadutils.middleware;
 
 
  
@@ -151,20 +151,20 @@ app.get('/index',checkAuthenticated, async (req,res) =>{
 
 app.post('/upload', uploadmiddleware, async function (req, res) {
     let fileData = [];
-    
+  
     if (req.files && req.files.length >= 1) {
-      for (let i = 0; i < req.files.length; i++) {
+      req.files.forEach(function (file) {
         fileData.push({
-          filename: req.files[i].filename,
-          originalname: req.files[i].originalname,
-          path: req.files[i].path,
-          size: req.files[i].size
+          filename: file.filename,
+          originalname: file.originalname,
+          path: file.path,
+          size: file.size
         });
-      }
+      });
     }
   
     // Retrieve the file numbers
-    const fileNumbers = fileData.map(file => uploadutils.getFileNumber());
+    const fileNumbers = fileData.map(() => uploadutils.getFileCount());
   
     if (req.body.featured == null || req.body.featured == false) {
       var isFeatured = false;

@@ -18,7 +18,7 @@
         <div class="col-sm-8 mt-3">
           <h4>Node.js upload images</h4>
 
-          <form action="/upload" method="POST" enctype="multipart/form-data">
+          <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <input type="text" id="featuredColumnTitle" name="featuredColumnTitle">
               <br>
@@ -26,7 +26,7 @@
               <br>
               <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions">
               <br>
-              <input type="file" name="files[]" id="input-files" class="form-control-file border" multiple>
+              <input type="file" name="files" id="input-files" class="form-control-file border" multiple>
               <input type="hidden" id="username" name="username" value="<%= username %>">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

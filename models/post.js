@@ -18,7 +18,7 @@ const postSchema = new Schema({
         type: Boolean
     },
     pictures: {
-        type: Number
+        type: Array
     }
 });
 
