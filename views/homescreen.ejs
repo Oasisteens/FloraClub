@@ -1,4 +1,4 @@
-<!-- <html lang="en">
+<html lang="en">
     <head>
         <title>Biph Flora</title>
         <style>
@@ -37,6 +37,10 @@
                 justify-content: center;
                 align-items: center
             }
+            img{
+                max-width: 300px; 
+                height: auto;
+            }
         </style>
     </head>
 
@@ -59,22 +63,21 @@
         </div>
         <br>
         <div id="featuredColumn">
+            <button id="prevBtn">上一个</button>
             <% posts.forEach(function(post) { %>
-                <div class="posts">
-                    <div id="featuredColumnTitle" class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
-                    <div id="featuredColumnContent" class="featuredColumnContent"><%= post.featuredColumnContent %></div>
-                    <div id="featuredColumnCaptions" class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
-                    <div class="postlayout">
-                        <% post.pictures.forEach(function(picture) { %>
-                            <div class="picture"><img src="<%= picture %>"></div>
-                        <% }); %>
-                    </div>
-                    <button id="prevBtn">上一个</button>
-                    <button id="nextBtn">下一个</button>
+              <div class="posts">
+                <div class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
+                <div class="featuredColumnContent"><%= post.featuredColumnContent %></div>
+                <div class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
+                <div class="postlayout">
+                  <% post.pictureUrl.forEach(function(image) { %>
+                    <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">
+                  <% }); %>
                 </div>
+              </div>
             <% }); %>
+            <button id="nextBtn">下一个</button>
         </div>
-
         <div id="bottomHalf">
             <h1>Database for campus species 校内植物检索数据库</h1>
             <div id="searchBar">
@@ -89,45 +92,9 @@
             <a href="showFullList">Show full list</a>
         </div>
         <script>
-            const posts = "<%- JSON.stringify(posts) %>";
-
-            let currentIndex = 0;
-            const recommendationContainer = document.getElementById("featuredColumn");
-            const prevBtn = document.getElementById("prevBtn");
-            const nextBtn = document.getElementById("nextBtn");
-
-            const parsedPosts = JSON.parse(posts);
-
-            function showRecommendation() {
-                const currentPost = parsedPosts[currentIndex];
-
-                document.getElementById("featuredColumnTitle").innerHTML = currentPost.featuredColumnTitle;
-                document.getElementById("featuredColumnContent").innerHTML = currentPost.featuredColumnContent;
-                document.getElementById("featuredColumnCaptions").innerHTML = currentPost.featuredColumnCaptions;
-
-                const imageElements = recommendationContainer.getElementsByClassName("picture");
-                for (let i = 0; i < currentPost.pictures.length; i++) {
-                    imageElements[i].getElementsByTagName("img")[0].src = currentPost.pictures[i];
-                }
-            }
-
-            prevBtn.addEventListener("click", function() {
-                currentIndex--;
-                if (currentIndex < 0) {
-                    currentIndex = parsedPosts.length - 1;
-                }
-                showRecommendation();
-            });
-
-            nextBtn.addEventListener("click", function() {
-                currentIndex++;
-                if (currentIndex >= parsedPosts.length) {
-                    currentIndex = 0;
-                }
-                showRecommendation();
-            });
-
-            showRecommendation();
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const posts = document.querySelector('posts');
         </script>
     </body>
-</html> -->
+</html>

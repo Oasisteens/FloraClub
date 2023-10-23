@@ -150,21 +150,9 @@ app.get('/index',checkAuthenticated, async (req,res) =>{
 })
 
 app.post('/upload', uploadmiddleware, async function (req, res) {
-    let fileData = [];
-  
-    if (req.files && req.files.length >= 1) {
-      req.files.forEach(function (file) {
-        fileData.push({
-          filename: file.filename,
-          originalname: file.originalname,
-          path: file.path,
-          size: file.size
-        });
-      });
-    }
   
     // Retrieve the file numbers
-    const fileNumbers = fileData.map(() => uploadutils.getFileCount());
+    const fileNumbers = uploadutils.getFileCount();
   
     if (req.body.featured == null || req.body.featured == false) {
       var isFeatured = false;
@@ -178,9 +166,21 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
       featuredColumnCaptions: req.body.featuredColumnCaptions,
       username: req.body.username,
       featured: isFeatured,
-      pictures: fileNumbers // Use the file numbers as the value for pictures array
+      pictures: fileNumbers,
+      pictureUrl: []
     });
   
+    if (req.files && req.files.length >= 1) {
+        req.files.forEach(function (file) {
+          post.pictureUrl.push({
+            filename: file.filename,
+            originalname: file.originalname,
+            path: file.path,
+            size: file.size
+          });
+        });
+      }
+
     await post.save();
     console.log(post.pictures)
   

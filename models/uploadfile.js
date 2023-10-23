@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-let fileCount = 0; // Initialize a variable to keep track of the file count
+var fileCount = 0; // Initialize a variable to keep track of the file count
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -8,18 +8,14 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const fileExtension = file.originalname.split('.').pop().toLowerCase();
-    const filename = 'biphflora-' + req.body.featuredColumnTitle + '-' + req.user.username + '-' + Date.now() + '.' + fileExtension; // Generate a unique filename
+    const filename = req.body.featuredColumnTitle + '.' + fileExtension; // Generate a unique filename
     cb(null, filename);
   }
 });
 
 const upload = multer({
   storage: storage
-}).array('files', 10); // Process up to 10 files with the field name 'files'
-
-const getFileCount = function () {
-  return fileCount; // Return the file count
-};
+}).array('files');
 
 const middleware = function(req, res, next) {
   upload(req, res, function (err) {
@@ -31,10 +27,15 @@ const middleware = function(req, res, next) {
       return res.status(500).json({ message: 'Unknown error occurred' });
     }
 
-    // Increment the file count by the number of uploaded files
-    fileCount += req.files.length;
+    // Set the file count to the number of uploaded files at the moment
+    fileCount = req.files ? req.files.length : 0; // Check if req.files exist before getting the length
+
     next();
   });
+};
+
+const getFileCount = function () {
+  return fileCount; // Return the file count
 };
 
 module.exports = {

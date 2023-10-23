@@ -18,8 +18,14 @@ const postSchema = new Schema({
         type: Boolean
     },
     pictures: {
-        type: Array
-    }
+        type: Number
+    },
+    pictureUrl: [{ 
+        filename: String,
+        originalname: String,
+        path: String,
+        size: Number
+      }]
 });
 
 module.exports = mongoose.model('Post', postSchema);
