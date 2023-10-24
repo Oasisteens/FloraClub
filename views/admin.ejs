@@ -32,16 +32,6 @@
                         <td><%= user.username %> </td>
                         <td><%= user.password %></td>
                         <td><%= user.admin %></td>
-<<<<<<< HEAD
-                        <div>
-                        <td><form action='/deleteUser' method="POST" class="deleteUsernameForm">
-                            <input type="hidden" value="<%= user.username %>" name="username">
-                            <button type="submit">Delete</button></form></td></div>
-                    
-                        <td><form action='/toggleAdmin' method="POST" class="toggleAdminForm">
-                            <input type="hidden" value="<%= user.username %>" name="username">
-                            <button type="submit">Toggle</button></form></td>
-=======
                         <td>
                             <form action='/deleteUser' method="POST" id="deleteUsernameForm">
                                 <input type="hidden" value="<%= user.username %>" name="username">
@@ -54,7 +44,6 @@
                                 <button type="submit">Toggle</button>
                             </form>
                         </td>
->>>>>>> 48c7439202aeefd3d4f42ec998daaff17c808b23
                         
                     </tr>
                 <% }) %>
