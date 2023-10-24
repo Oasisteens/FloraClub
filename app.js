@@ -6,6 +6,8 @@ const ObjectId = mongodb.ObjectId;
 const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
+const natural = require('natural');
+const levenshteinDistance = natural.LevenshteinDistance;
  
 
 const session = require('express-session');
@@ -187,9 +189,6 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.render('index', { username: req.body.username });
   });
 
-  app.post('/searchResults', async (req, res) => {
-    res.render('searchResults')
-  })
 
   app.get('/test', (req, res) => {
     res.render('test')
@@ -203,6 +202,24 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     if (req.user.admin == true) {
         res.render('admin', { users, posts })
     } else{res.redirect('homescreen')}
+  })
+
+  app.post('/searchResults', async (req, res) => {
+    console.log('worked');
+    const search = req.body.topic;
+    const posts = await Post.find();
+    const matchedPost = [];
+
+    posts.forEach((post) => {
+        distance = levenshteinDistance(post.featuredColumnTitle, search)
+        console.log(distance)
+        if (distance < 2) {
+            console.log('matched');
+            matchedPost.push(post)
+        }
+    })
+    console.log(matchedPost);
+    res.render('searchResults', { posts: matchedPost })
   })
  
 
