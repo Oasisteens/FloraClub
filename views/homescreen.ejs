@@ -30,6 +30,7 @@
                 width: 95%;
                 margin-left: auto;
                 margin-right: auto;
+                display: flex;
             }
 
             .postlayout{
@@ -41,9 +42,13 @@
                 max-width: 300px; 
                 height: auto;
             }
+            .posts{
+                flex: 1;
+            }
         </style>
     </head>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <body>
         <div id="topBar">
             <h1>BIPH FLORA</h1>
@@ -64,7 +69,7 @@
         <br>
         <div id="featuredColumn">
             <button id="prevBtn">上一个</button>
-            <% posts.forEach(function(post) { %>
+            <% posts.forEach(function(post, index) { %>
               <div class="posts">
                 <div class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
                 <div class="featuredColumnContent"><%= post.featuredColumnContent %></div>
@@ -94,7 +99,18 @@
         <script>
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
-            const posts = document.querySelector('posts');
+            const posts = document.querySelectorAll('.post');
+            const maxIndex = '<%= posts.length - 1 %>'; // Assuming posts is an array-like object
+        
+            let currentIndex = 0;
+        
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + maxIndex) % maxIndex;
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % maxIndex;
+            });
         </script>
     </body>
 </html>
