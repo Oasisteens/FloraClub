@@ -1,3 +1,9 @@
 <html>
     <h1>Success</h1>
+    <% posts.forEach((post) => { %>
+        <div class="results">
+        <h3><%=post.featuredColumnTitle%></h3>
+        <p>Creater: <%=post.username%></p>
+        </div>
+    <% }) %>
 </html>

@@ -49,11 +49,13 @@
                 <% }) %>
             </table>
             <br><br>
+            <h1>Post management:</h1>
             <table id="postTable">
                 <tr>
                 <th>Topic</th>
                 <th>Delete</th>
                 <th>Feature</th>
+                <th>Feature Toggle</th>
                 </tr>
 
                 <% posts.forEach(function(post) { %>
@@ -63,6 +65,11 @@
                             <input type="hidden" value="<%= post.id %>" name="postId">
                             <button type="submit">Delete</button>
                         </form>  </td>
+                        <td><%= post.featured %></td>
+                        <td><form action='/toggleFeature' method="POST" id="togglePostForm">
+                            <input type="hidden" value="<%= post.id %>" name="postId">
+                            <button type="submit">Toggle</button>
+                        </form></td>
                     </tr>
                 <% }) %>
             </table>

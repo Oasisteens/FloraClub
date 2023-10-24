@@ -15,11 +15,16 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const uploadmiddleware = uploadutils.middleware;
 
-
+console.log(Date.now())
  
 
 const User = require('./models/user');
 const Post = require('./models/post');
+
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -190,6 +195,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
   });
 
 
+
   app.get('/test', (req, res) => {
     res.render('test')
   })
@@ -205,7 +211,6 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
   })
 
   app.post('/searchResults', async (req, res) => {
-    console.log('worked');
     const search = req.body.topic;
     const posts = await Post.find();
     const matchedPost = [];
@@ -213,7 +218,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     posts.forEach((post) => {
         distance = levenshteinDistance(post.featuredColumnTitle, search)
         console.log(distance)
-        if (distance < 2) {
+        if (distance < 4) {
             console.log('matched');
             matchedPost.push(post)
         }
@@ -243,6 +248,15 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     console.log('admin toggled');
     res.redirect('/admin');
   })
+
+  app.post('/toggleFeature', async (req, res) => {
+    const postToToggle = await Post.findOne({ _id: req.body.postId })
+    postToToggle.featured = !postToToggle.featured;
+    await postToToggle.save();
+    console.log('post toggled');
+    res.redirect('/admin');
+  })
+
 
 /*app.use((req, res, next) => {
     res.status(404).render('404');
