@@ -1,0 +1,6 @@
+--require ts-node/register
+--ui bdd
+--inline-diffs
+--timeout 10000
+--exit
+src/**/*.spec.ts src/**/*.spec.ts

@@ -23,7 +23,7 @@
                 margin: 0;
             }
 
-            #featuredColumn {
+            .featuredColumn {
                 border: solid black 2px;
                 height: 40%;
                 position: relative;
@@ -46,9 +46,8 @@
                 flex: 1;
             }
         </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <body>
         <div id="topBar">
             <h1>BIPH FLORA</h1>
@@ -67,21 +66,41 @@
             </div>
         </div>
         <br>
-        <div id="featuredColumn">
-            <button id="prevBtn">上一个</button>
-            <% posts.forEach(function(post, index) { %>
-              <div class="posts">
-                <div class="featuredColumnTitle"><%= post.featuredColumnTitle %></div>
-                <div class="featuredColumnContent"><%= post.featuredColumnContent %></div>
-                <div class="featuredColumnCaptions"><%= post.featuredColumnCaptions %></div>
-                <div class="postlayout">
-                  <% post.pictureUrl.forEach(function(image) { %>
-                    <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">
-                  <% }); %>
-                </div>
-              </div>
-            <% }); %>
-            <button id="nextBtn">下一个</button>
+        <div class="featuredColumn">
+                <button id="prevBtn">上一个</button>
+                <div class="posts" id="posta"></div>
+                <button id="nextBtn">下一个</button>
+            <script>
+                let currentIndex = 0;
+            
+                function updatePost(currentIndex) {
+                    document.getElementById("posta").innerHTML = `
+                        <div class="featuredColumnTitle"><%= posts[0].featuredColumnTitle %></div>
+                        <div class="featuredColumnContent"><%= posts[0].featuredColumnContent %></div>
+                        <div class="featuredColumnCaptions"><%= posts[0].featuredColumnCaptions %></div>
+                        <div class="postlayout">
+                            <% posts[0].pictureUrl.forEach(function(image) { %>
+                          <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">
+                        <% }); %>
+                        </div>
+                    `;
+                }
+            
+                document.getElementById("prevBtn").addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex -= 1;
+                        updatePost();
+                    }
+                });
+            
+                document.getElementById("nextBtn").addEventListener('click', () => {
+                    if (currentIndex < posts.length - 1) {
+                        currentIndex += 1;
+                        updatePost();
+                    }
+                });
+                updatePost();
+            </script>
         </div>
         <div id="bottomHalf">
             <h1>Database for campus species 校内植物检索数据库</h1>
@@ -96,21 +115,5 @@
             <h3># of Plant species recorded inside the database</h3>
             <a href="showFullList">Show full list</a>
         </div>
-        <script>
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const posts = document.querySelectorAll('.post');
-            const maxIndex = '<%= posts.length - 1 %>'; // Assuming posts is an array-like object
-        
-            let currentIndex = 0;
-        
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + maxIndex) % maxIndex;
-            });
-            
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % maxIndex;
-            });
-        </script>
     </body>
 </html>
