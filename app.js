@@ -6,6 +6,8 @@ const ObjectId = mongodb.ObjectId;
 const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
+const natural = require('natural');
+const levenshteinDistance = natural.LevenshteinDistance;
  
 
 const session = require('express-session');
@@ -13,11 +15,16 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const uploadmiddleware = uploadutils.middleware;
 
-
+console.log(Date.now())
  
 
 const User = require('./models/user');
 const Post = require('./models/post');
+
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -187,9 +194,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.render('index', { username: req.body.username });
   });
 
-  app.post('/searchResults', async (req, res) => {
-    res.render('searchResults')
-  })
+
 
   app.get('/test', (req, res) => {
     res.render('test')
@@ -203,6 +208,23 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     if (req.user.admin == true) {
         res.render('admin', { users, posts })
     } else{res.redirect('homescreen')}
+  })
+
+  app.post('/searchResults', async (req, res) => {
+    const search = req.body.topic;
+    const posts = await Post.find();
+    const matchedPost = [];
+
+    posts.forEach((post) => {
+        distance = levenshteinDistance(post.featuredColumnTitle, search)
+        console.log(distance)
+        if (distance < 4) {
+            console.log('matched');
+            matchedPost.push(post)
+        }
+    })
+    console.log(matchedPost);
+    res.render('searchResults', { posts: matchedPost })
   })
  
 
@@ -226,6 +248,15 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     console.log('admin toggled');
     res.redirect('/admin');
   })
+
+  app.post('/toggleFeature', async (req, res) => {
+    const postToToggle = await Post.findOne({ _id: req.body.postId })
+    postToToggle.featured = !postToToggle.featured;
+    await postToToggle.save();
+    console.log('post toggled');
+    res.redirect('/admin');
+  })
+
 
 /*app.use((req, res, next) => {
     res.status(404).render('404');
