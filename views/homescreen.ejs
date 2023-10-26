@@ -70,37 +70,39 @@
                 <button id="prevBtn">上一个</button>
                 <div class="posts" id="posta"></div>
                 <button id="nextBtn">下一个</button>
-            <script>
-                let currentIndex = 0;
-            
-                function updatePost(currentIndex) {
-                    document.getElementById("posta").innerHTML = `
-                        <div class="featuredColumnTitle"><%= posts[0].featuredColumnTitle %></div>
-                        <div class="featuredColumnContent"><%= posts[0].featuredColumnContent %></div>
-                        <div class="featuredColumnCaptions"><%= posts[0].featuredColumnCaptions %></div>
-                        <div class="postlayout">
-                            <% posts[0].pictureUrl.forEach(function(image) { %>
-                          <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">
-                        <% }); %>
-                        </div>
-                    `;
-                }
-            
-                document.getElementById("prevBtn").addEventListener('click', () => {
-                    if (currentIndex > 0) {
-                        currentIndex -= 1;
-                        updatePost();
+                <script>
+                    function updatePost() {
+                        fetch('/homescreensetup')
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    document.getElementById("posta").innerHTML = data.html;
+                                }
+                            });
                     }
-                });
-            
-                document.getElementById("nextBtn").addEventListener('click', () => {
-                    if (currentIndex < posts.length - 1) {
-                        currentIndex += 1;
-                        updatePost();
-                    }
-                });
-                updatePost();
-            </script>
+                
+                    document.getElementById("prevBtn").addEventListener('click', () => {
+                        fetch('/updateIndexprev')
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    document.getElementById("posta").innerHTML = data.html;
+                                }
+                            });
+                    });
+                
+                    document.getElementById("nextBtn").addEventListener('click', () => {
+                        fetch('/updateIndexnext')
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    document.getElementById("posta").innerHTML = data.html;
+                                }
+                            });
+                    });
+                
+                    updatePost();
+                </script>
         </div>
         <div id="bottomHalf">
             <h1>Database for campus species 校内植物检索数据库</h1>

@@ -7,6 +7,7 @@ const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
 const natural = require('natural');
+
 const levenshteinDistance = natural.LevenshteinDistance;
  
 
@@ -61,7 +62,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'BIPHFlora',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true
 }));
 
  
@@ -126,6 +127,72 @@ app.post('/register', async (req, res) => {
     }
 })
 
+app.use((req, res, next) => {
+    req.session.currentIndex = 0;
+    next();
+});
+
+app.get('/updateIndexprev', async (req, res) => {
+    const posts = await Post.find();
+    if (req.session.currentIndex > 0) {
+        req.session.currentIndex -= 1;
+    }
+    
+    req.session.save(() => {
+        const post = posts[req.session.currentIndex];
+    
+        const html = `
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+            <div class="postlayout">
+                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+        `;
+    
+        res.json({ success: true, html });
+    });
+});
+
+app.get('/updateIndexnext', async (req, res) => {
+    const posts = await Post.find();
+
+    if (req.session.currentIndex < posts.length - 1) {
+        req.session.currentIndex += 1;
+    }
+
+    // 保存 currentIndex 的值
+    req.session.save(() => {
+        const post = posts[req.session.currentIndex];
+    
+        const html = `
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+            <div class="postlayout">
+                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+        `;
+    
+        res.json({ success: true, html });
+    });
+});
+
+app.get('/homescreensetup', async (req, res) => {
+        const posts = await Post.find();
+        const post = posts[req.session.currentIndex];
+    
+        const html = `
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+            <div class="postlayout">
+                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+        `;
+    
+        res.json({ success: true, html });
+});
  
 
 app.get('/login', async (req, res) => {
