@@ -39,13 +39,14 @@
             }
 
             .featuredColumn {
-                border: solid black 2px;
+                border: solid transparent 2px;
                 height: 40%;
                 position: relative;
                 width: 95%;
                 margin-left: auto;
                 margin-right: auto;
                 display: flex;
+                background-color: #e0e9d4;
             }
 
             .postlayout{
@@ -63,12 +64,48 @@
             .title{
                 position: relative;
                 left: 40px;
+                padding-right: 60px ;
+                border-right: 5px solid #ffffff;
+                font-size: 44px;
             }
             .linkBarLink{
                 color: #7a9a6d;
                 text-decoration: none;
             }
+            .hline{
+                height: 5px;
+                background-color: white;
+            }
+            footer{
+                background-color: rgb(133, 132, 132);
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .beian{
+                text-decoration: none;
+                color: black;
+                font-size: 20px;
+            }
+            /* Style the buttons */
+            button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            }
+
+            /* Style the ionicons */
+            ion-icon {
+            font-size: 4.5rem;
+            color: #739566;
+            }
         </style>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://kit.fontawesome.com/8394235f03.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
@@ -85,12 +122,19 @@
                 </div>
             </div>
         </header>
+        <div class="hline">
+            <hr>
+        </div>
         <br>
         <nav>
             <div class="featuredColumn">
-                <button id="prevBtn">上一个</button>
+                <button id="prevBtn">
+                    <ion-icon name="caret-back-sharp"></ion-icon>
+                </button>
                 <div class="posts" id="posta"></div>
-                <button id="nextBtn">下一个</button>
+                <button id="nextBtn">
+                    <ion-icon name="caret-forward-sharp"></ion-icon>
+                </button>
                 <script>
                     function updatePost() {
                         fetch('/homescreensetup')
@@ -121,7 +165,7 @@
                                 }
                             });
                     });
-                
+
                     updatePost();
                 </script>
         </div>
@@ -140,5 +184,8 @@
             <h3># of Plant species recorded inside the database</h3>
             <a href="showFullList">Show full list</a>
         </div>
+        <footer>
+            <a href="https://beian.miit.gov.cn" target="_blank" class="beian">湘ICP备2023027594号-1</a>
+        </footer>
     </body>
 </html>
