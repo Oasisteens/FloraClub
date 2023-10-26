@@ -1,0 +1,7 @@
+
+<h1><%= post.featuredColumnTitle %></h1>
+<p><%= post.featuredColumnContent %></p>
+<p><%= post.featuredColumnCaptions %></p>
+<% post.pictureUrl.forEach(function(image) { %>                       
+    <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">                     
+    <% }); %>

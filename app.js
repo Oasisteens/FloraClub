@@ -282,8 +282,12 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
             matchedPost.push(post)
         }
     })
-    console.log(matchedPost);
     res.render('searchResults', { posts: matchedPost })
+  })
+
+  app.post('/specificResults', async(req, res) => {
+    const post = await Post.findOne({ featuredColumnTitle: req.body.postTitle })
+    res.render('specificResults', { post });
   })
  
 

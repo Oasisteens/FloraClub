@@ -1,8 +1,16 @@
 <html>
-    <h1>Success</h1>
+    <h1>Database</h1>
+    <form method="POST" action="/searchResults">
+        <input type="text" name="topic" id="topic">
+        <button type="submit">Search</button>
+        <div id="resultsContainer"></div>
+    </form>
     <% posts.forEach((post) => { %>
         <div class="results">
-        <h3><%=post.featuredColumnTitle%></h3>
+        <form method="POST" action="specificResults">
+            <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
+            <button><%=post.featuredColumnTitle%></button>
+        </form>
         <p>Creater: <%=post.username%></p>
         </div>
     <% }) %>
