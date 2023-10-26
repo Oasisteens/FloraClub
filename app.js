@@ -7,6 +7,7 @@ const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
 const natural = require('natural');
+var currentIndex = 0;
 
 const levenshteinDistance = natural.LevenshteinDistance;
  
@@ -15,12 +16,11 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const uploadmiddleware = uploadutils.middleware;
-
-console.log(Date.now())
  
 
 const User = require('./models/user');
 const Post = require('./models/post');
+const { curry } = require('lodash');
 
 
 function escapeRegex(text) {
@@ -127,19 +127,14 @@ app.post('/register', async (req, res) => {
     }
 })
 
-app.use((req, res, next) => {
-    req.session.currentIndex = 0;
-    next();
-});
-
 app.get('/updateIndexprev', async (req, res) => {
     const posts = await Post.find();
-    if (req.session.currentIndex > 0) {
-        req.session.currentIndex -= 1;
+    if (currentIndex > 0) {
+        currentIndex -= 1;
     }
     
     req.session.save(() => {
-        const post = posts[req.session.currentIndex];
+        const post = posts[currentIndex];
     
         const html = `
             <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -157,13 +152,11 @@ app.get('/updateIndexprev', async (req, res) => {
 app.get('/updateIndexnext', async (req, res) => {
     const posts = await Post.find();
 
-    if (req.session.currentIndex < posts.length - 1) {
-        req.session.currentIndex += 1;
+    if (currentIndex < posts.length - 1) {
+        currentIndex += 1;
     }
 
-    // 保存 currentIndex 的值
-    req.session.save(() => {
-        const post = posts[req.session.currentIndex];
+        const post = posts[currentIndex];
     
         const html = `
             <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -175,12 +168,11 @@ app.get('/updateIndexnext', async (req, res) => {
         `;
     
         res.json({ success: true, html });
-    });
 });
 
 app.get('/homescreensetup', async (req, res) => {
         const posts = await Post.find();
-        const post = posts[req.session.currentIndex];
+        const post = posts[currentIndex];
     
         const html = `
             <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
