@@ -2,24 +2,38 @@
     <head>
         <title>Biph Flora</title>
         <style>
+            @import url( 'https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+            body, h1, p {
+                font-family: 'poppins',sans-serif;
+            }
+            /* body {
+            background: url('intro.jpg')no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            } */
+            #topbar{
+                display: inline-block;
+                display: flex;
+            }
             .links{
                 display: flex;
-                align-items: center;
-                justify-content: center;
+                position: fixed;
+                top: 35px;
+                right: 40px;
+                padding: 8px;
+                background-color: #e2e8d1;
+                border: 2px solid transparent;
+                border-radius: 10px;
             }
             h1{
                 text-align: center;
             }
 
-            #linkBar {
-                border-collapse: collapse;
-                border: 2px solid;
-            }
-
             a {
                 display: inline-block;
-                border: 1px solid black;
-                padding: 10px 20px;
+                border: 1px solid transparent;
+                padding: 5px 10px;
                 margin: 0;
             }
 
@@ -45,28 +59,34 @@
             .posts{
                 flex: 1;
             }
+            .title{
+                position: relative;
+                left: 40px;
+            }
+            .linkBarLink{
+                color: #7a9a6d;
+                text-decoration: none;
+            }
         </style>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <div id="topBar">
-            <h1>BIPH FLORA</h1>
-            <div class="links">
-                <table id="linkBar">
-                    <tr>
-                        <td><a class="linkBarLink" href="home">Home</a></td>
-                        <td><a class="linkBarLink" href="databse">Database</a></td>
-                        <td><a class="linkBarLink" href="creation">Creation</a></td>
-                        <td><a class="linkBarLink" href="activities">Activities</a></td>
-                        <td><a class="linkBarLink" href="journey">Journey</a></td>
-                        <td><a class="linkBarLink" href="aboutUs">About us</a></td>
-                        <td><a class="linkBarLink" href="registration">Registration</a></td>
-                    </tr>
-                </table>
+        <header>
+            <div id="topBar">
+                <h1 class="title">BIPH FLORA</h1>
+                <div class="links">
+                            <a class="linkBarLink" href="home">Home</a>
+                            <a class="linkBarLink" href="databse">Database</a>
+                            <a class="linkBarLink" href="creation">Creation</a>
+                            <a class="linkBarLink" href="activities">Activities</a>
+                            <a class="linkBarLink" href="journey">Journey</a>
+                            <a class="linkBarLink" href="aboutUs">About us</a>
+                            <a class="linkBarLink" href="registration">Registration</a>
+                </div>
             </div>
-        </div>
+        </header>
         <br>
-        <div class="featuredColumn">
+        <nav>
+            <div class="featuredColumn">
                 <button id="prevBtn">上一个</button>
                 <div class="posts" id="posta"></div>
                 <button id="nextBtn">下一个</button>
@@ -104,6 +124,7 @@
                     updatePost();
                 </script>
         </div>
+        </nav>
         <div id="bottomHalf">
             <h1>Database for campus species 校内植物检索数据库</h1>
             <div id="searchBar">
