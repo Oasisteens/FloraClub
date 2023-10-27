@@ -1,70 +1,79 @@
 <html>
-    <style>
-        .part1 {
-                background: url('homescreen.jpg') no-repeat;
+    <head>
+        <title>Database</title>
+        <style>
+            .part1 {
+                    background: url('homescreen.jpg') no-repeat;
+                    border: none;
+                    background-position: center center;
+                    position: relative;
+                    background-size: cover;
+                    background-attachment: scroll;
+                    margin: 0;
+                    padding-bottom: 120px;
+                }
+
+                .part2 {
+                    background: url('homescreen1.jpg') no-repeat;
+                    border: none;
+                    position: relative;
+                    background-position: center center;
+                    background-size: cover;
+                    background-attachment: scroll;
+                    margin: 0;
+                    padding: 0;
+                }
+                #searchBar {
+                background-color: #fffffa;
+                width: 70%;
+                margin: 0 auto;
+                border-radius: 50px;
+                overflow: hidden;
+                }
+
+                .searchContainer {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                border: 2px;
+                }
+
+                #topic {
+                position: relative;
+                flex: 1;
                 border: none;
-                background-position: center center;
-                position: relative;
-                background-size: cover;
-                background-attachment: scroll;
-                margin: 0;
-                padding-bottom: 120px;
-            }
+                font-size: 26px;
+                outline: none;
+                background-color: transparent;
+                color: black;
+                top: 8px;
+                left: 25px;
+                }
 
-            .part2 {
-                background: url('homescreen1.jpg') no-repeat;
+                .searchBtn {
+                position: relative;
+                background-color: transparent;
                 border: none;
-                position: relative;
-                background-position: center center;
-                background-size: cover;
-                background-attachment: scroll;
-                margin: 0;
-                padding: 0;
-            }
-            #searchBar {
-            background-color: #fffffa;
-            width: 70%;
-            margin: 0 auto;
-            border-radius: 50px;
-            overflow: hidden;
-            }
-
-            .searchContainer {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border: 2px;
-            }
-
-            #topic {
-            position: relative;
-            flex: 1;
-            border: none;
-            font-size: 26px;
-            outline: none;
-            background-color: transparent;
-            color: black;
-            top: 8px;
-            left: 25px;
-            }
-
-            .searchBtn {
-            position: relative;
-            background-color: transparent;
-            border: none;
-            font-size: 34px;
-            cursor: pointer;
-            outline: none;
-            top: 7px;
-            right: 45px;
-            }
-            .searchtitle{
-                position: relative;
-                left: 20px;
-                text-align: left;
-                font-weight: 530;
-            }
-    </style>
+                font-size: 34px;
+                cursor: pointer;
+                outline: none;
+                top: 7px;
+                right: 45px;
+                }
+                .searchtitle{
+                    position: relative;
+                    left: 20px;
+                    text-align: left;
+                    font-weight: 530;
+                }
+                p{
+                    color: white;
+                }
+        </style>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://kit.fontawesome.com/8394235f03.js" crossorigin="anonymous"></script>
+    </head>
     <div class="part1">
         <h1>Database</h1>
         <div id="searchBar">
