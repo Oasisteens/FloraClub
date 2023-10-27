@@ -1,17 +1,47 @@
+<style>
+body {
+    background-color: #506d4e;
+}
+form {
+    background-color: white;
+    padding: 30px 60px 50px 60px;;
+    width: 250px;
+    border-radius: 5px;
+    position: absolute;
+    left: 38%;
+    top: 28%;
+}
+
+button {
+    background-color: #11770a;
+    color: white;
+    border: white;
+    padding: 6px 10px;
+}
+</style>
+
+
+
+
+
 <form action="/register" method="POST">
     <h2>Register</h2>
         <div class="inputbox">
             <ion-icon name="mail-outline"></ion-icon>
-            <input name="username" type="username" required id="username">
             <label for="username">Username:</label>
+            <input name="username" type="username" required id="username">
         </div>
+        <br>
         <div class="inputbox">
             <ion-icon name="lock-closed-outline"></ion-icon>
-            <input name="password" type="password" required id="password">
             <label for="password">Password:</label>
+            <input name="password" type="password" required id="password">
         </div>
+        <br>
         <div class="inputbox">
-            <input name="adminCode" type="text" id="adminCode">
             <label for="adminCode">Admin Code: /optional</label>
+            <input name="adminCode" type="text" id="adminCode">
         </div>
+        <br>
+        <br>
         <button type="submit">Register</button>
