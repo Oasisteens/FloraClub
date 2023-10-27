@@ -1,6 +1,27 @@
 <html>
     <style>
-        #searchBar {
+        .part1 {
+                background: url('homescreen.jpg') no-repeat;
+                border: none;
+                background-position: center center;
+                position: relative;
+                background-size: cover;
+                background-attachment: scroll;
+                margin: 0;
+                padding-bottom: 120px;
+            }
+
+            .part2 {
+                background: url('homescreen1.jpg') no-repeat;
+                border: none;
+                position: relative;
+                background-position: center center;
+                background-size: cover;
+                background-attachment: scroll;
+                margin: 0;
+                padding: 0;
+            }
+            #searchBar {
             background-color: #fffffa;
             width: 70%;
             margin: 0 auto;
@@ -23,7 +44,7 @@
             outline: none;
             background-color: transparent;
             color: black;
-            top:8px;
+            top: 8px;
             left: 25px;
             }
 
@@ -43,24 +64,26 @@
                 text-align: left;
                 font-weight: 530;
             }
-     
     </style>
-    <h1>Database</h1>
-    <form method="POST" action="/searchResults">
-        <div class="searchContainer">
-            <input type="text" name="topic" id="topic" placeholder="Search...">
-            <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+    <div class="part1">
+        <h1>Database</h1>
+        <div id="searchBar">
+            <form method="POST" action="/searchResults">
+                <div class="searchContainer">
+                    <input type="text" name="topic" id="topic" placeholder="Search...">
+                    <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                </div>
+                <div id="resultsContainer"></div>
+            </form>
         </div>
-        <div id="resultsContainer"></div>
-    </form>
-</div>
-    <% posts.forEach((post) => { %>
-        <div class="results">
-        <form method="POST" action="specificResults">
-            <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
-            <button><%=post.featuredColumnTitle%></button>
-        </form>
-        <p>Creater: <%=post.username%></p>
-        </div>
-    <% }) %>
+        <% posts.forEach((post) => { %>
+            <div class="results">
+            <form method="POST" action="specificResults">
+                <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
+                <button><%=post.featuredColumnTitle%></button>
+            </form>
+            <p>Creater: <%=post.username%></p>
+            </div>
+        <% }) %>
+    </div>
 </html>
