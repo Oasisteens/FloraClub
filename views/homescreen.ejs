@@ -6,14 +6,9 @@
             body, h1, p {
                 font-family: 'poppins',sans-serif;
                 color: #ffffff;
-                overflow-y: visible;
                 overflow-x: hidden;
-            }
-            body {
-            background: url('homescreen.jpg')no-repeat;
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
+                margin: 0;
+                padding: 0;
             }
             #topbar{
                 display: inline-block;
@@ -21,7 +16,7 @@
             }
             .links{
                 display: flex;
-                position: fixed;
+                position: absolute;
                 top: 35px;
                 right: 40px;
                 padding: 8px;
@@ -42,13 +37,14 @@
 
             .featuredColumn {
                 border: solid transparent 2px;
-                height: 40%;
+                height: 60%;
                 position: relative;
                 width: 95%;
                 margin-left: auto;
                 margin-right: auto;
                 display: flex;
                 background-color: #e0e9d4;
+                padding-top: 80px;
             }
 
             .postlayout{
@@ -66,6 +62,7 @@
             .title{
                 position: relative;
                 left: 40px;
+                top: 30px;
                 padding-right: 60px ;
                 border-right: 5px solid #ffffff;
                 font-size: 44px;
@@ -78,6 +75,8 @@
             }
             .hline{
                 height: 5px;
+                position: relative;
+                top: 70px;
                 background-color: white;
             }
             footer{
@@ -148,89 +147,140 @@
                 text-align: left;
                 font-weight: 530;
             }
+            .featuredTopBar{
+                background-color: #506d4e;
+                position: relative;
+                width: 95%;
+                border: solid transparent 2px;
+                height: 80px;
+                position: relative;
+                width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h4{
+                font-size: 34px;
+                position: relative;
+                font-weight: 415;
+                bottom: 35px;
+                left: 55px;
+            }
+            .part1 {
+                background: url('homescreen.jpg') no-repeat;
+                border: none;
+                background-position: center center;
+                position: relative;
+                background-size: cover;
+                background-attachment: scroll;
+                margin: 0;
+                padding-bottom: 120px;
+            }
+
+            .part2 {
+                background: url('homescreen1.jpg') no-repeat;
+                border: none;
+                position: relative;
+                background-position: center center;
+                background-size: cover;
+                background-attachment: scroll;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav{
+                position: relative;
+                top: 70px;
+            }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://kit.fontawesome.com/8394235f03.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header>
-            <div id="topBar">
-                <h1 class="title">BIPH FLORA</h1>
-                <div class="links">
-                            <a class="linkBarLink" href="home">Home</a>
-                            <a class="linkBarLink" href="databse">Database</a>
-                            <a class="linkBarLink" href="creation">Creation</a>
-                            <a class="linkBarLink" href="activities">Activities</a>
-                            <a class="linkBarLink" href="journey">Journey</a>
-                            <a class="linkBarLink" href="aboutUs">About us</a>
-                            <a class="linkBarLink" href="registration">Registration</a>
-                </div>
-            </div>
-        </header>
-        <div class="hline">
-            <hr>
-        </div>
-        <br>
-        <nav>
-            <div class="featuredColumn">
-                <button id="prevBtn">
-                    <ion-icon class="postBtn" name="caret-back-sharp"></ion-icon>
-                </button>
-                <div class="posts" id="posta"></div>
-                <button id="nextBtn">
-                    <ion-icon class="postBtn" name="caret-forward-sharp"></ion-icon>
-                </button>
-                <script>
-                    function updatePost() {
-                        fetch('/homescreensetup')
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    document.getElementById("posta").innerHTML = data.html;
-                                }
-                            });
-                    }
-                
-                    document.getElementById("prevBtn").addEventListener('click', () => {
-                        fetch('/updateIndexprev')
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    document.getElementById("posta").innerHTML = data.html;
-                                }
-                            });
-                    });
-                
-                    document.getElementById("nextBtn").addEventListener('click', () => {
-                        fetch('/updateIndexnext')
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    document.getElementById("posta").innerHTML = data.html;
-                                }
-                            });
-                    });
-
-                    updatePost();
-                </script>
-        </div>
-        </nav>
-        <div id="bottomHalf">
-            <h1 class="searchtitle">Database for campus species 校内植物检索数据库</h1>
-            <div id="searchBar">
-                <form method="POST" action="/searchResults">
-                    <div class="searchContainer">
-                        <input type="text" name="topic" id="topic" placeholder="Search...">
-                        <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        <div class="part1">
+            <header>
+                <div id="topBar">
+                    <h1 class="title">BIPH FLORA</h1>
+                    <div class="links">
+                                <a class="linkBarLink" href="home">Home</a>
+                                <a class="linkBarLink" href="databse">Database</a>
+                                <a class="linkBarLink" href="creation">Creation</a>
+                                <a class="linkBarLink" href="activities">Activities</a>
+                                <a class="linkBarLink" href="journey">Journey</a>
+                                <a class="linkBarLink" href="aboutUs">About us</a>
+                                <a class="linkBarLink" href="registration">Registration</a>
                     </div>
-                    <div id="resultsContainer"></div>
-                </form>
+                </div>
+            </header>
+            <div class="hline">
+                <hr>
             </div>
-            <h3># of Plant species inside of our campus</h3>
-            <h3></h3>
-            <h3># of Plant species recorded inside the database</h3>
-            <a href="showFullList">Show full list</a>
+            <br>
+            <nav>
+                <div class="featuredTopBar">
+                    <h4>Plant in Bloom</h4>
+                </div>
+                <div class="featuredColumn">
+                    <button id="prevBtn">
+                        <ion-icon class="postBtn" name="caret-back-sharp"></ion-icon>
+                    </button>
+                    <div class="posts" id="posta"></div>
+                    <button id="nextBtn">
+                        <ion-icon class="postBtn" name="caret-forward-sharp"></ion-icon>
+                    </button>
+                    <script>
+                        function updatePost() {
+                            fetch('/homescreensetup')
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        document.getElementById("posta").innerHTML = data.html;
+                                    }
+                                });
+                        }
+                    
+                        document.getElementById("prevBtn").addEventListener('click', () => {
+                            fetch('/updateIndexprev')
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        document.getElementById("posta").innerHTML = data.html;
+                                    }
+                                });
+                        });
+                    
+                        document.getElementById("nextBtn").addEventListener('click', () => {
+                            fetch('/updateIndexnext')
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        document.getElementById("posta").innerHTML = data.html;
+                                    }
+                                });
+                        });
+
+                        updatePost();
+                    </script>
+                </div>
+            </nav>
+        </div>
+        <div class="part2">
+            <div id="bottomHalf">
+                <h1 class="searchtitle">Database for campus species 校内植物检索数据库</h1>
+                <div id="searchBar">
+                    <form method="POST" action="/searchResults">
+                        <div class="searchContainer">
+                            <input type="text" name="topic" id="topic" placeholder="Search...">
+                            <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                        </div>
+                        <div id="resultsContainer"></div>
+                    </form>
+                </div>
+                <h3># of Plant species inside of our campus</h3>
+                <h3></h3>
+                <h3># of Plant species recorded inside the database</h3>
+                <a href="showFullList">Show full list</a>
+            </div>
         </div>
         <footer>
             <a href="https://beian.miit.gov.cn" target="_blank" class="beian">湘ICP备2023027594号-1</a>

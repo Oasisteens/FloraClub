@@ -162,9 +162,11 @@ app.get('/updateIndexnext', async (req, res) => {
             <div class="postlayout">
                 ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+            <div class="postcontents">
+                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+                <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+            </div>
         `;
     
         res.json({ success: true, html });
