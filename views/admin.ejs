@@ -16,7 +16,49 @@
                 border: black solid;
                 border-collapse: collapse;
             }
+
+            #topbar{
+                display: inline-block;
+                display: flex;
+            }
+            .links{
+                display: flex;
+                position: absolute;
+                top: 35px;
+                right: 40px;
+                padding: 8px;
+                background-color: #e2e8d1;
+                border: 2px solid transparent;
+                border-radius: 10px;
+            }
+            a {
+                display: inline-block;
+                border: 1px solid transparent;
+                padding: 5px 10px;
+                margin: 0;
+            }
+
+            .linkBarLink{
+                color: #7a9a6d;
+                font-size: 20px;
+                text-decoration: none;
+            }
+
         </style>
+        <header>
+            <div id="topBar">
+                <h1 class="title">BIPH FLORA</h1>
+                <div class="links">
+                    <a class="linkBarLink" href="homescreen">Home</a>
+                    <a class="linkBarLink" href="searchResults">Database</a>
+                    <a class="linkBarLink" href="creation">Creation</a>
+                    <a class="linkBarLink" href="activities">Activities</a>
+                    <a class="linkBarLink" href="journey">Journey</a>
+                    <a class="linkBarLink" href="aboutUs">About us</a>
+                    <a class="linkBarLink" href="login">Registration</a>
+                </div>
+            </div>
+        </header>
     </head>
     <body>
         <div type="account">
