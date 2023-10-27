@@ -98,9 +98,45 @@
             }
 
             /* Style the ionicons */
-            ion-icon {
+            .postBtn {
             font-size: 4.5rem;
             color: #739566;
+            }
+            #searchBar {
+            background-color: #fffffa;
+            width: 70%;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            }
+
+            .searchContainer {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            }
+
+            #topic {
+            position: relative;
+            flex: 1;
+            border: none;
+            font-size: 26px;
+            outline: none;
+            background-color: transparent;
+            color: black;
+            top:8px;
+            left: 25px;
+            }
+
+            .searchBtn {
+            position: relative;
+            background-color: transparent;
+            border: none;
+            font-size: 34px;
+            cursor: pointer;
+            outline: none;
+            top: 7px;
+            right: 45px;
             }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -129,11 +165,11 @@
         <nav>
             <div class="featuredColumn">
                 <button id="prevBtn">
-                    <ion-icon name="caret-back-sharp"></ion-icon>
+                    <ion-icon class="postBtn" name="caret-back-sharp"></ion-icon>
                 </button>
                 <div class="posts" id="posta"></div>
                 <button id="nextBtn">
-                    <ion-icon name="caret-forward-sharp"></ion-icon>
+                    <ion-icon class="postBtn" name="caret-forward-sharp"></ion-icon>
                 </button>
                 <script>
                     function updatePost() {
@@ -174,8 +210,10 @@
             <h1>Database for campus species 校内植物检索数据库</h1>
             <div id="searchBar">
                 <form method="POST" action="/searchResults">
-                    <input type="text" name="topic" id="topic">
-                    <button type="submit">Search</button>
+                    <div class="searchContainer">
+                        <input type="text" name="topic" id="topic" placeholder="Search...">
+                        <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                    </div>
                     <div id="resultsContainer"></div>
                 </form>
             </div>
