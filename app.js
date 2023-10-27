@@ -198,6 +198,8 @@ app.get('/login', async (req, res) => {
     res.render('login');
 })
 
+
+
  
 
 app.post('/login', passport.authenticate('local', {
@@ -205,9 +207,9 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
   }));
 
-app.get('/homescreen', checkAuthenticated, async (req, res) => {
+app.get('/homescreen', async (req, res) => {
     const posts = await Post.find()
-    res.render('homescreen', {username: req.user.username, posts})
+    res.render('homescreen', {posts})
 })
 
 app.get('/',checkAuthenticated, async (req, res) => {

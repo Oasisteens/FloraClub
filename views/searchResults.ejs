@@ -1,10 +1,59 @@
 <html>
+    <style>
+        #searchBar {
+            background-color: #fffffa;
+            width: 70%;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            }
+
+            .searchContainer {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px;
+            }
+
+            #topic {
+            position: relative;
+            flex: 1;
+            border: none;
+            font-size: 26px;
+            outline: none;
+            background-color: transparent;
+            color: black;
+            top:8px;
+            left: 25px;
+            }
+
+            .searchBtn {
+            position: relative;
+            background-color: transparent;
+            border: none;
+            font-size: 34px;
+            cursor: pointer;
+            outline: none;
+            top: 7px;
+            right: 45px;
+            }
+            .searchtitle{
+                position: relative;
+                left: 20px;
+                text-align: left;
+                font-weight: 530;
+            }
+     
+    </style>
     <h1>Database</h1>
     <form method="POST" action="/searchResults">
-        <input type="text" name="topic" id="topic">
-        <button type="submit">Search</button>
+        <div class="searchContainer">
+            <input type="text" name="topic" id="topic" placeholder="Search...">
+            <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        </div>
         <div id="resultsContainer"></div>
     </form>
+</div>
     <% posts.forEach((post) => { %>
         <div class="results">
         <form method="POST" action="specificResults">
