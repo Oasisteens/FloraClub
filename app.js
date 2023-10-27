@@ -139,10 +139,11 @@ app.get('/updateIndexprev', async (req, res) => {
         const html = `
         <div class="postlayout">
         ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-    </div>
-    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-    <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+        </div>
+        <div class="postcontents">
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+        </div>
         `;
     
         res.json({ success: true, html });
@@ -163,7 +164,6 @@ app.get('/updateIndexnext', async (req, res) => {
                 ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
-                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
                 <div class="featuredColumnContent">${post.featuredColumnContent}</div>
                 <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
             </div>
@@ -179,10 +179,11 @@ app.get('/homescreensetup', async (req, res) => {
         const html = `
         <div class="postlayout">
         ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-    </div>
-    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-    <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+        </div>
+        <div class="postcontents">
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
+        </div>
         `;
     
         res.json({ success: true, html });
