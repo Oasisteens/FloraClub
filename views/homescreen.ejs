@@ -44,18 +44,21 @@
                 margin-right: auto;
                 display: flex;
                 background-color: #e0e9d4;
-                padding-top: 80px;
+                padding-top: 50px;
             }
 
             .postlayout{
                 display: flex;
                 justify-content: center;
-                align-items: center
+                align-items: center;
             }
+
             img{
-                max-width: 300px; 
+                max-width: 500px;
                 height: auto;
+                padding: 40px;
             }
+
             .posts{
                 flex: 1;
             }
@@ -191,6 +194,31 @@
                 position: relative;
                 top: 50px;
             }
+            .postcontents {
+                position: absolute;
+                align-items: center;
+                justify-content: center;
+                display: inline-flex;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 97.3%;
+                text-align: center;
+                height: 15%;
+                border: 2px solid transparent;
+                padding: 30px;
+                background-color: #9db894;
+                font-size: 22px;
+                color: #33472e;
+            }
+            .featuredColumnContent{
+                position: absolute;
+                left: 270px;
+            }
+            .featuredColumnCaptions{
+                position: absolute;
+                right: 360px;
+            }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -202,13 +230,13 @@
                 <div id="topBar">
                     <h1 class="title">BIPH FLORA</h1>
                     <div class="links">
-                                <a class="linkBarLink" href="home">Home</a>
-                                <a class="linkBarLink" href="databse">Database</a>
-                                <a class="linkBarLink" href="creation">Creation</a>
-                                <a class="linkBarLink" href="activities">Activities</a>
-                                <a class="linkBarLink" href="journey">Journey</a>
-                                <a class="linkBarLink" href="aboutUs">About us</a>
-                                <a class="linkBarLink" href="registration">Registration</a>
+                        <a class="linkBarLink" href="home">Home</a>
+                        <a class="linkBarLink" href="databse">Database</a>
+                        <a class="linkBarLink" href="creation">Creation</a>
+                        <a class="linkBarLink" href="activities">Activities</a>
+                        <a class="linkBarLink" href="journey">Journey</a>
+                        <a class="linkBarLink" href="aboutUs">About us</a>
+                        <a class="linkBarLink" href="registration">Registration</a>
                     </div>
                 </div>
             </header>
