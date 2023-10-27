@@ -6,6 +6,8 @@
             body, h1, p {
                 font-family: 'poppins',sans-serif;
                 color: #ffffff;
+                overflow-y: visible;
+                overflow-x: hidden;
             }
             body {
             background: url('homescreen.jpg')no-repeat;
@@ -67,9 +69,11 @@
                 padding-right: 60px ;
                 border-right: 5px solid #ffffff;
                 font-size: 44px;
+                font-weight: 550;
             }
             .linkBarLink{
                 color: #7a9a6d;
+                font-size: 20px;
                 text-decoration: none;
             }
             .hline{
@@ -79,10 +83,10 @@
             footer{
                 background-color: rgb(133, 132, 132);
                 text-align: center;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
+                position: relative;
+                bottom: -10;
+                margin-left: -10;
+                margin-right: -10;
             }
             .beian{
                 text-decoration: none;
@@ -137,6 +141,12 @@
             outline: none;
             top: 7px;
             right: 45px;
+            }
+            .searchtitle{
+                position: relative;
+                left: 20px;
+                text-align: left;
+                font-weight: 530;
             }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -207,7 +217,7 @@
         </div>
         </nav>
         <div id="bottomHalf">
-            <h1>Database for campus species 校内植物检索数据库</h1>
+            <h1 class="searchtitle">Database for campus species 校内植物检索数据库</h1>
             <div id="searchBar">
                 <form method="POST" action="/searchResults">
                     <div class="searchContainer">

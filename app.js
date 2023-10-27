@@ -137,12 +137,12 @@ app.get('/updateIndexprev', async (req, res) => {
         const post = posts[currentIndex];
     
         const html = `
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
-            <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-            </div>
+        <div class="postlayout">
+        ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+    </div>
+    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+    <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
         `;
     
         res.json({ success: true, html });
@@ -159,12 +159,12 @@ app.get('/updateIndexnext', async (req, res) => {
         const post = posts[currentIndex];
     
         const html = `
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
             <div class="postlayout">
                 ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
         `;
     
         res.json({ success: true, html });
@@ -175,12 +175,12 @@ app.get('/homescreensetup', async (req, res) => {
         const post = posts[currentIndex];
     
         const html = `
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
-            <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-            </div>
+        <div class="postlayout">
+        ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+    </div>
+    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+    <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
         `;
     
         res.json({ success: true, html });
