@@ -9,6 +9,13 @@
       div.preview-images > img {
         width: 30%;
       }
+      button {
+        color: white;
+        background-color: #11770a;
+        border: white;
+        padding: 7px;
+      }
+      
     </style>
   </head>
 
@@ -22,13 +29,18 @@
             <div class="form-group">
               <input type="text" id="featuredColumnTitle" name="featuredColumnTitle">
               <br>
+              <br>
               <input type="text" id="featuredColumnContent" name="featuredColumnContent">
+              <br>
               <br>
               <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions">
               <br>
+              <br>
               <input type="file" name="files" id="input-files" class="form-control-file border" multiple>
+              <br>
               <input type="hidden" id="username" name="username" value="<%= username %>">
             </div>
+            <br>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

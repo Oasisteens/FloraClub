@@ -270,7 +270,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     const posts = await Post.find();
 
     if (req.user.admin == true) {
-        res.render('admin', { users, posts })
+        res.render('admin', { users, posts, username: req.user.username })
     } else{res.redirect('homescreen')}
   })
 
