@@ -2,18 +2,19 @@
     <head>
         <style>
             #userTable{
-                border: black solid;
+                border: black solid 1px;
                 border-collapse: collapse;
             }
             td {
-                border: black solid;
+                border: black solid 1px;;
+                text-align: center;
             }
             th {
-                border: black solid;
+                border: black solid 1px;
             }
 
             #POSTtABLE{
-                border: black solid;
+                border: black solid 1px;
                 border-collapse: collapse;
             }
 
@@ -42,6 +43,22 @@
                 color: #7a9a6d;
                 font-size: 20px;
                 text-decoration: none;
+            }
+            #makeAPost{
+                background-color: #11770a;
+                text-decoration: none;
+                color: white;
+                padding: 8px;
+
+            }
+
+            button {
+                background-color: #11770a;
+                color: white;
+                border: solid white;
+                padding: 6px;
+                position: relative;
+                top:7px;
             }
 
         </style>
@@ -117,6 +134,8 @@
             </table>
         </div>
     <br><br>
-    <a href="/">Make a Post!</a>
+    <a href="/" id="makeAPost">Make a Post</a>
+    
+    
     </body>
 </html>
