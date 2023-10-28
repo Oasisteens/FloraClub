@@ -141,8 +141,8 @@ app.get('/updateIndexprev', async (req, res) => {
         ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
         </div>
         <div class="postcontents">
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
             <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
         </div>
         `;
     
@@ -164,8 +164,8 @@ app.get('/updateIndexnext', async (req, res) => {
                 ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
+                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
                 <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-                <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
             </div>
         `;
     
@@ -181,14 +181,14 @@ app.get('/homescreensetup', async (req, res) => {
         ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
         </div>
         <div class="postcontents">
+            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
             <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-            <div class="featuredColumnCaptions">${post.featuredColumnCaptions}</div>
         </div>
         `;
     
         res.json({ success: true, html });
 });
- 
+
 
 app.get('/login', async (req, res) => {
     const ip_address = req.ip || req.connection.remoteAddress;
