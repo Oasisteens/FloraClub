@@ -25,10 +25,12 @@
                 }
                 #searchBar {
                 background-color: #fffffa;
-                width: 70%;
+                width: 80%;
                 margin: 0 auto;
                 border-radius: 50px;
                 overflow: hidden;
+                height: 5%;
+                position: relative;
                 }
 
                 .searchContainer {
@@ -69,6 +71,28 @@
                 p{
                     color: white;
                 }
+                #greenBox{
+                    border: black 1px;
+                    background-color: #506d4e;
+                    padding: 20px 10px;;
+                    width: 96%;
+                    left: 1%;
+                    position: relative;
+                    left: 20px
+
+                }
+
+                #littleLessGreenBox{
+                    border: black 1px;
+                    background-color: #accaa9;
+                    padding: 20px 10px;
+                    width: 96%;
+                    position: relative;
+                    left: 20px;
+                    height: 700px;
+                }
+
+
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -76,6 +100,7 @@
     </head>
     <div class="part1">
         <h1>Database</h1>
+        <div id="greenBox">
         <div id="searchBar">
             <form method="POST" action="/searchResults">
                 <div class="searchContainer">
@@ -85,6 +110,8 @@
                 <div id="resultsContainer"></div>
             </form>
         </div>
+        </div>
+        <div id="littleLessGreenBox">
         <% posts.forEach((post) => { %>
             <div class="results">
             <form method="POST" action="specificResults">
@@ -94,5 +121,6 @@
             <p>Creater: <%=post.username%></p>
             </div>
         <% }) %>
+        </div>
     </div>
 </html>
