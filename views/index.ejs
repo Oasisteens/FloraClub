@@ -10,9 +10,10 @@
         width: 30%;
       }
 
-      #featuredColumnTItle {
-        width: 100%;
-  
+
+      .col-sm-8mt-3 {
+        padding: 20px;
+        width: 800px;
       }
 
       button {
@@ -21,6 +22,15 @@
         border: white;
         padding: 7px;
       }
+
+  #featuredColumnTitle,
+  #featuredColumnContent,
+  #featuredColumnCaptions {
+    width: 700px;
+    height: 30px;
+  }
+
+</style>
       
     </style>
   </head>
@@ -28,18 +38,18 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-sm-8 mt-3">
-          <h4>Node.js upload images</h4>
+        <div class="col-sm-8mt-3">
+          <h3>Node.js upload images</h3>
 
           <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
-              <input type="text" id="featuredColumnTitle" name="featuredColumnTitle">
+              <input type="text" id="featuredColumnTitle" name="featuredColumnTitle" placeholder="Plant Name">
               <br>
               <br>
-              <input type="text" id="featuredColumnContent" name="featuredColumnContent">
+              <input type="text" id="featuredColumnContent" name="featuredColumnContent" placeholder="Content">
               <br>
               <br>
-              <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions">
+              <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions" placeholder="Captions">
               <br>
               <br>
               <input type="file" name="files" id="input-files" class="form-control-file border" multiple>
