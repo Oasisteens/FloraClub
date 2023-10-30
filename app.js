@@ -7,7 +7,6 @@ const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
 const natural = require('natural');
-var currentIndex = 0;
 
 const levenshteinDistance = natural.LevenshteinDistance;
  
@@ -129,8 +128,10 @@ app.post('/register', async (req, res) => {
 
 app.get('/updateIndexprev', async (req, res) => {
     const posts = await Post.find();
+    const currentIndex = req.session.currentIndex || 0;
+
     if (currentIndex > 0) {
-        currentIndex -= 1;
+        req.session.currentIndex = currentIndex - 1;
     }
     
     req.session.save(() => {
@@ -152,9 +153,10 @@ app.get('/updateIndexprev', async (req, res) => {
 
 app.get('/updateIndexnext', async (req, res) => {
     const posts = await Post.find();
+    const currentIndex = req.session.currentIndex || 0;
 
     if (currentIndex < posts.length - 1) {
-        currentIndex += 1;
+        req.session.currentIndex = currentIndex + 1;
     }
 
         const post = posts[currentIndex];
@@ -174,6 +176,7 @@ app.get('/updateIndexnext', async (req, res) => {
 
 app.get('/homescreensetup', async (req, res) => {
         const posts = await Post.find();
+        const currentIndex = req.session.currentIndex || 0;
         const post = posts[currentIndex];
     
         const html = `
