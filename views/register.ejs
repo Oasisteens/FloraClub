@@ -51,7 +51,7 @@
         transition: .5s;
     }
     input:focus ~ label,
-    input:valid ~ label{
+    input:invalid ~ label{
     top: -5px;
     }
     .inputbox input {
@@ -132,12 +132,12 @@
                 <h2>Register</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input name="username" type="username" required id="username">
+                        <input name="username" type="username" id="username">
                         <label for="username">Username:</label>
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input name="password" type="password" required id="password">
+                        <input name="password" type="password" id="password">
                         <label for="password">Password:</label>
                     </div>
                     <div class="inputbox">
