@@ -135,7 +135,7 @@ app.get('/updateIndexprev', async (req, res) => {
     }
     
     req.session.save(() => {
-        const post = posts[currentIndex];
+        const post = posts[req.session.currentIndex];
     
         const html = `
         <div class="postlayout">
@@ -159,7 +159,7 @@ app.get('/updateIndexnext', async (req, res) => {
         req.session.currentIndex = currentIndex + 1;
     }
 
-        const post = posts[currentIndex];
+        const post = posts[req.session.currentIndex];
     
         const html = `
             <div class="postlayout">
