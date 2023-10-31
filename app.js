@@ -134,7 +134,7 @@ app.post('/register', async (req, res) => {
 })
 
 app.get('/updateIndexprev', async (req, res) => {
-    const posts = await Post.find();
+    const posts = await Post.find({ featured: true });
     const currentIndex = req.session.currentIndex || 0;
 
     if (currentIndex > 0) {
@@ -160,7 +160,7 @@ app.get('/updateIndexprev', async (req, res) => {
 });
 
 app.get('/updateIndexnext', async (req, res) => {
-    const posts = await Post.find();
+    const posts = await Post.find({ featured: true });
     const currentIndex = req.session.currentIndex || 0;
 
     if (currentIndex < posts.length - 1) {
@@ -188,7 +188,7 @@ app.get('/updateIndexnext', async (req, res) => {
 });
 
 app.get('/homescreensetup', async (req, res) => {
-        const posts = await Post.find();
+        const posts = await Post.find({ featured: true });
         const currentIndex = req.session.currentIndex || 0;
         const post = posts[currentIndex];
         if (post) {
@@ -225,7 +225,7 @@ app.post('/login', passport.authenticate('local', {
   }));
 
 app.get('/homescreen', attachUsername, async (req, res) => {
-    const posts = await Post.find()
+    const posts = await Post.find({featured: true})
     res.render('homescreen', {posts, username: req.username, admin: req.admin})
 })
 
