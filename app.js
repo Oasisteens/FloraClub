@@ -133,7 +133,7 @@ app.get('/updateIndexprev', async (req, res) => {
     if (currentIndex > 0) {
         req.session.currentIndex = currentIndex - 1;
     }
-    
+    if (posts) {
     req.session.save(() => {
         const post = posts[req.session.currentIndex];
     
@@ -149,6 +149,7 @@ app.get('/updateIndexprev', async (req, res) => {
     
         res.json({ success: true, html });
     });
+}
 });
 
 app.get('/updateIndexnext', async (req, res) => {
@@ -159,7 +160,11 @@ app.get('/updateIndexnext', async (req, res) => {
         req.session.currentIndex = currentIndex + 1;
     }
 
+
         const post = posts[req.session.currentIndex];
+
+
+    if (post) {
     
         const html = `
             <div class="postlayout">
@@ -172,12 +177,14 @@ app.get('/updateIndexnext', async (req, res) => {
         `;
     
         res.json({ success: true, html });
+    }
 });
 
 app.get('/homescreensetup', async (req, res) => {
         const posts = await Post.find();
         const currentIndex = req.session.currentIndex || 0;
         const post = posts[currentIndex];
+        if (post) {
     
         const html = `
         <div class="postlayout">
@@ -189,7 +196,7 @@ app.get('/homescreensetup', async (req, res) => {
         </div>
         `;
     
-        res.json({ success: true, html });
+        res.json({ success: true, html })};
 });
 
 
@@ -307,6 +314,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
   app.post('/deletePost', async (req, res) => {
     console.log(req.body.postId)
     postToDelete = Post.find({ _id: req.body.postId })
+    delete req.session.currentIndex
     await Post.deleteOne({ _id: req.body.postId})
     res.redirect('/admin')
   })
