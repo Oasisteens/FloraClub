@@ -237,7 +237,15 @@
                         <a class="linkBarLink" href="activities">Activities</a>
                         <a class="linkBarLink" href="journey">Journey</a>
                         <a class="linkBarLink" href="aboutUs">About us</a>
+                        <% if (username) { %>
+                            <% if (admin == true) { %>
+                                <a class=linkBarLink href="admin">Admin</a>
+                            <% } else { %>
+                                <p> Login Successful</p>
+                            <%}%>
+                       <% } else { %>
                         <a class="linkBarLink" href="login">Registration</a>
+                        <%}%>
                     </div>
                 </div>
             </header>

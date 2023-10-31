@@ -82,6 +82,13 @@ function checkAuthenticated(req, res, next) {
     res.redirect('/login')
 }
 
+const attachUsername = (req, res, next) => {
+    if (req.isAuthenticated()) {
+      req.username = req.user.username;
+      req.admin = req.user.admin;
+    }
+    next();
+  };
 
 
  
@@ -217,9 +224,9 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
   }));
 
-app.get('/homescreen', async (req, res) => {
+app.get('/homescreen', attachUsername, async (req, res) => {
     const posts = await Post.find()
-    res.render('homescreen', {posts})
+    res.render('homescreen', {posts, username: req.username, admin: req.admin})
 })
 
 app.get('/',checkAuthenticated, async (req, res) => {
