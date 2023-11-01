@@ -93,7 +93,6 @@
                 background-color: rgb(133, 132, 132);
                 text-align: center;
                 position: relative;
-                bottom: -10;
                 margin-left: -10;
                 margin-right: -10;
             }
@@ -247,6 +246,25 @@
                 left: 2.5rem;
                 font-size: 1.2rem;
             }
+            #activitiesBlock{
+                    border: black 1px;
+                    background-color: #516d4e;
+                    padding: 20px 10px;;
+                    width: 96%;
+                    left: 1%;
+                    position: relative;
+                    left: 20px;
+                }
+
+                #littleLessGreenBox{
+                    border: black 1px;
+                    background-color: #e0e8d5;
+                    padding: 20px 10px;
+                    width: 96%;
+                    position: relative;
+                    left: 20px;
+                    height: 40%;
+                }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -328,9 +346,9 @@
                 </div>
             </nav>
         </div>
-        <!-- <div class="hline" style="height: 0.5px;">
+        <div class="hline" style="height: 0.5px;">
             <hr>
-        </div> -->
+        </div>
         <div class="part2">
             <br>
             <br>
@@ -357,11 +375,17 @@
                 <a href="showFullList" class="showFullList">Show full list...</a>
             </div>
         </div>
+        <div class="hline" style="height: 0.5px;">
+            <hr>
+        </div>
         <div class="part3">
+            <br>
+            <br>
             <section id="bottomSection">
                 <div id="activitiesBlock">
                     <h1>Upcoming Activities</h1>
                 </div>
+                <div id="littleLessGreenBox"></div>
             </section>
         </div>
         <footer>
