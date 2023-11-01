@@ -349,7 +349,10 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     console.log('post toggled');
     res.redirect('/admin');
   })
-
+  
+  app.get('/creation', async (req, res) => {
+    res.render('creation')
+  })
 
 app.use((req, res, next) => {
     res.status(404).render('404');
