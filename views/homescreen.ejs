@@ -66,7 +66,7 @@
                 position: relative;
                 left: 40px;
                 top: 30px;
-                padding-right: 60px ;
+                padding-right: 60px;
                 border-right: 5px solid #ffffff;
                 font-size: 44px;
                 font-weight: 550;
@@ -77,7 +77,7 @@
                 text-decoration: none;
             }
             .hline{
-                height: 5px;
+                height: 0.3rem;
                 position: relative;
                 top: 40px;
                 background-color: white;
@@ -148,7 +148,7 @@
                 position: relative;
                 left: 20px;
                 text-align: left;
-                font-weight: 530;
+                font-weight: 580;
             }
             .featuredTopBar{
                 background-color: #506d4e;
@@ -162,11 +162,11 @@
                 margin-right: auto;
             }
             h4{
-                font-size: 34px;
+                font-size: 2.5rem;
                 position: relative;
                 font-weight: 415;
-                bottom: 33px;
-                left: 55px;
+                bottom: 2.8rem;
+                left: 3.5rem;
             }
             .part1 {
                 background: url('homescreen.jpg') no-repeat;
@@ -181,6 +181,17 @@
 
             .part2 {
                 background: url('homescreen1.jpg') no-repeat;
+                border: none;
+                position: relative;
+                background-position: center center;
+                background-size: cover;
+                background-attachment: scroll;
+                margin: 0;
+                padding: 0;
+            }
+
+            .part3 {
+                background: url('part3.jpg') no-repeat;
                 border: none;
                 position: relative;
                 background-position: center center;
@@ -219,6 +230,15 @@
             .featuredColumnContent{
                 position: absolute;
                 right: 360px;
+            }
+            .showFullList{
+                color: white;
+                text-decoration: underline;
+            }
+            #bottomHalf{
+                position: relative;
+                left: 2.5rem;
+                font-size: 1.2rem;
             }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -301,9 +321,16 @@
                 </div>
             </nav>
         </div>
+        <div class="hline" style="height: 0.5px;">
+            <hr>
+        </div>
         <div class="part2">
+            <br>
+            <br>
             <div id="bottomHalf">
                 <h1 class="searchtitle">Database for campus species 校内植物检索数据库</h1>
+                <br>
+                <br>
                 <div id="searchBar">
                     <form method="POST" action="/searchResults">
                         <div class="searchContainer">
@@ -313,19 +340,25 @@
                         <div id="resultsContainer"></div>
                     </form>
                 </div>
-                <h3># of Plant species inside of our campus</h3>
-                <h3></h3>
-                <h3># of Plant species recorded inside the database</h3>
-                <a href="showFullList">Show full list</a>
+                <div class="block">
+                    <h3># of Plant species inside of our campus</h3>
+                </div>
+                <br>
+                <div class="block">
+                    <h3># of Plant species recorded inside the database</h3>
+                </div>
+                <a href="showFullList" class="showFullList">Show full list...</a>
             </div>
+        </div>
+        <div class="part3">
+            <section id="bottomSection">
+                <div id="activitiesBlock">
+                    <h1>Upcoming Activities</h1>
+                </div>
+            </section>
         </div>
         <footer>
             <a href="https://beian.miit.gov.cn" target="_blank" class="beian">湘ICP备2023027594号-1</a>
         </footer>
-        <section id="bottomSection">
-            <div id="activitiesBlock">
-                <h1>Upcoming Activities</h1>
-            </div>
-        </section>
     </body>
 </html>
