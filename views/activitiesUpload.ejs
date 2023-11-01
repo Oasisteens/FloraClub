@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Activities Upload</title>
+    <style>
+      div.preview-images > img {
+        width: 30%;
+      }
+
+
+      .col-sm-8mt-3 {
+        padding: 20px;
+        width: 800px;
+      }
+
+      button {
+        color: white;
+        background-color: #11770a;
+        border: white;
+        padding: 7px;
+      }
+
+  #featuredColumnTitle,
+  #featuredColumnContent,
+  #featuredColumnCaptions {
+    width: 700px;
+    height: 30px;
+  }
+
+</style>
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8mt-3">
+          <h3>Activities Upload</h3>
+
+          <form action="/uploadActivities" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" id="activityTitle" name="activityTitle" placeholder="Event name">
+              <br>
+              <br>
+              <input type="text" id="activityDescription" name="activityDescription" placeholder="Description">
+              <br>
+              <br>
+              <input type="text" id="activityCaptions" name="activityCaptions" placeholder="Captions">
+              <br>
+              <br>
+              <input type="file" name="files" id="input-files" class="form-control-file border" multiple>
+              <br>
+              <input type="hidden" id="username" name="username" value="<%= username %>">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="preview-images"></div>
+        </div>
+      </div>
+    </div>
+<!--javascript for previewing the picture-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        let imagesPreview = function(input, placeToInsertImagePreview) {
+          if (input.files) {
+            let filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+              let reader = new FileReader();
+              reader.onload = function(event) {
+                $($.parseHTML("<img>"))
+                  .attr("src", event.target.result)
+                  .appendTo(placeToInsertImagePreview);
+              };
+              reader.readAsDataURL(input.files[i]);
+            }
+          }
+        };
+        $("#input-files").on("change", function() {
+          imagesPreview(this, "div.preview-images");
+        });
+      });
+    </script>
+<!--javascript for previewing the picture-->
+  </body>
+</html>

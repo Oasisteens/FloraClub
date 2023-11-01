@@ -235,6 +235,10 @@ app.get('/',checkAuthenticated, async (req, res) => {
     res.render('index' , { username: req.user.username })
 })
 
+app.get('/activitiesUpload', checkAuthenticated, async (req, res) => {
+    res.render('activitiesUpload', { username: req.user.username })
+})
+
 app.get('/index',checkAuthenticated, async (req,res) =>{
     res.render('index' , { username: req.user.username });
 })
