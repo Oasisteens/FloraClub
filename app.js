@@ -226,7 +226,9 @@ app.post('/login', passport.authenticate('local', {
 
 app.get('/homescreen', attachUsername, async (req, res) => {
     const posts = await Post.find({featured: true})
-    res.render('homescreen', {posts, username: req.username, admin: req.admin})
+    let recordedPlantsNum = 0
+    posts.forEach((post) => {recordedPlantsNum++})
+    res.render('homescreen', {posts, username: req.username, admin: req.admin, recordedPlantsNum})
 })
 
 app.get('/',checkAuthenticated, async (req, res) => {
