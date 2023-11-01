@@ -2,72 +2,98 @@
     <head>
         <title>Database</title>
         <style>
-            .part1 {
-                    background: url('homescreen.jpg') no-repeat;
-                    border: none;
-                    background-position: center center;
-                    position: relative;
-                    background-size: cover;
-                    background-attachment: scroll;
-                    margin: 0;
-                    padding-bottom: 120px;
-                }
-
-                .part2 {
-                    background: url('homescreen1.jpg') no-repeat;
-                    border: none;
-                    position: relative;
-                    background-position: center center;
-                    background-size: cover;
-                    background-attachment: scroll;
-                    margin: 0;
-                    padding: 0;
-                }
-                #searchBar {
-                background-color: #fffffa;
-                width: 80%;
-                margin: 0 auto;
-                border-radius: 50px;
-                overflow: hidden;
-                height: 5%;
-                position: relative;
-                }
-
-                .searchContainer {
+            @import url( 'https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+            body, h1, p {
+                font-family: 'poppins',sans-serif;
+                color: #ffffff;
+                overflow-x: hidden;
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                background: url('homescreen.jpg')no-repeat;
+                background-position: top;
+                background-size: cover;
+                background-attachment: fixed;
+            }
+            #topbar{
+                display: inline-block;
                 display: flex;
-                align-items: center;
-                padding: 10px;
-                border: 2px;
-                }
-
-                #topic {
+            }
+            .links{
+                display: flex;
+                position: absolute;
+                top: 35px;
+                right: 40px;
+                padding: 8px;
+                background-color: #e2e8d1;
+                border: 2px solid transparent;
+                border-radius: 10px;
+            }
+            h1{
+                text-align: center;
+            }
+            .hline{
+                height: 0.3rem;
                 position: relative;
-                flex: 1;
-                border: none;
-                font-size: 26px;
-                outline: none;
-                background-color: transparent;
-                color: black;
-                top: 8px;
-                left: 25px;
-                }
-
-                .searchBtn {
+                top: 40px;
+                background-color: white;
+            }
+            a {
+                display: inline-block;
+                border: 1px solid transparent;
+                padding: 5px 10px;
+                margin: 0;
+            }
+            .title{
                 position: relative;
-                background-color: transparent;
-                border: none;
-                font-size: 34px;
-                cursor: pointer;
-                outline: none;
-                top: 7px;
-                right: 45px;
-                }
-                .searchtitle{
-                    position: relative;
-                    left: 20px;
-                    text-align: left;
-                    font-weight: 530;
-                }
+                left: 40px;
+                top: 30px;
+                padding-right: 60px;
+                font-size: 44px;
+                font-weight: 550;
+            }
+            .linkBarLink{
+                color: #7a9a6d;
+                font-size: 20px;
+                text-decoration: none;
+            }
+            #searchBar {
+            background-color: #fffffa;
+            width: 80%;
+            margin: 0 auto;
+            border-radius: 6rem;
+            overflow: hidden;
+            }
+
+            .searchContainer {
+            display: flex;
+            align-items: center;
+            padding: 0.2rem;
+            }
+
+            #topic {
+            position: relative;
+            flex: 1;
+            border: none;
+            font-size: 26px;
+            outline: none;
+            background-color: transparent;
+            color: black;
+            top:8px;
+            left: 25px;
+            }
+
+            .searchBtn {
+            position: relative;
+            background-color: transparent;
+            border: none;
+            font-size: 34px;
+            cursor: pointer;
+            outline: none;
+            top: 7px;
+            right: 45px;
+            }
                 p{
                     color: white;
                 }
@@ -91,36 +117,56 @@
                     left: 20px;
                     height: 700px;
                 }
-
-
+                .part1{
+                    position: relative;
+                    top: 3.5rem;
+                }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://kit.fontawesome.com/8394235f03.js" crossorigin="anonymous"></script>
     </head>
-    <div class="part1">
-        <h1>Database</h1>
-        <div id="greenBox">
-        <div id="searchBar">
-            <form method="POST" action="/searchResults">
-                <div class="searchContainer">
-                    <input type="text" name="topic" id="topic" placeholder="Search...">
-                    <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+    <body>
+        <header>
+            <div id="topBar">
+                <h1 class="title">BIPH FLORA</h1>
+                <div class="links">
+                    <a class="linkBarLink" href="homescreen">Home</a>
+                    <a class="linkBarLink" href="searchResults">Database</a>
+                    <a class="linkBarLink" href="creation">Creation</a>
+                    <a class="linkBarLink" href="activities">Activities</a>
+                    <a class="linkBarLink" href="journey">Journey</a>
+                    <a class="linkBarLink" href="aboutUs">About us</a>
+                    <a class="linkBarLink" href="login">Registration</a>
                 </div>
-                <div id="resultsContainer"></div>
-            </form>
-        </div>
-        </div>
-        <div id="littleLessGreenBox">
-        <% posts.forEach((post) => { %>
-            <div class="results">
-            <form method="POST" action="specificResults">
-                <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
-                <button><%=post.featuredColumnTitle%></button>
-            </form>
-            <p>Creater: <%=post.username%></p>
             </div>
-        <% }) %>
+        </header>
+        <div class="hline">
+            <hr>
         </div>
-    </div>
+        <div class="part1">
+            <div id="greenBox">
+            <div id="searchBar">
+                <form method="POST" action="/searchResults">
+                    <div class="searchContainer">
+                        <input type="text" name="topic" id="topic" placeholder="Search...">
+                        <button class="searchBtn" type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                    </div>
+                    <div id="resultsContainer"></div>
+                </form>
+            </div>
+            </div>
+            <div id="littleLessGreenBox">
+            <% posts.forEach((post) => { %>
+                <div class="results">
+                <form method="POST" action="specificResults">
+                    <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
+                    <button><%=post.featuredColumnTitle%></button>
+                </form>
+                <p>Creater: <%=post.username%></p>
+                </div>
+            <% }) %>
+            </div>
+        </div>
+    </body>
 </html>
