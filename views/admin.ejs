@@ -1,6 +1,11 @@
 <html>
     <head>
         <style>
+            @import url( 'https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+            body, h1, p {
+                font-family: 'poppins',sans-serif;
+                overflow-x: hidden;
+            }
             #userTable{
                 border: black solid 1px;
                 border-collapse: collapse;
@@ -49,7 +54,7 @@
                 text-decoration: none;
                 color: white;
                 padding: 8px;
-
+                border-radius: 30px;
             }
 
             button {
@@ -59,9 +64,12 @@
                 padding: 6px;
                 position: relative;
                 top:7px;
+                border-radius: 30px;
             }
 
         </style>
+        <title>Admin</title>
+    </head>
         <header>
             <div id="topBar">
                 <h1 class="title">BIPH FLORA</h1>
@@ -76,10 +84,9 @@
                 </div>
             </div>
         </header>
-    </head>
     <body>
         <div type="account">
-            <h1>Account management:</h1>
+            <h1>Account Management:</h1>
             <table id="userTable">
                 <th>Username</th>
                 <th>Password</th>
@@ -109,7 +116,7 @@
             </table>
             <br>
             <br>
-            <h1>Post management:</h1>
+            <h1>Post Management:</h1>
             <table id="postTable">
                 <tr>
                 <th>Topic</th>
