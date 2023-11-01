@@ -50,7 +50,6 @@
                 left: 40px;
                 top: 30px;
                 padding-right: 60px;
-                border-right: 5px solid #ffffff;
                 font-size: 44px;
                 font-weight: 550;
             }
@@ -59,51 +58,42 @@
                 font-size: 20px;
                 text-decoration: none;
             }
-                #searchBar {
-                background-color: #fffffa;
-                width: 80%;
-                margin: 0 auto;
-                border-radius: 50px;
-                overflow: hidden;
-                height: 5%;
-                position: relative;
-                }
+            #searchBar {
+            background-color: #fffffa;
+            width: 80%;
+            margin: 0 auto;
+            border-radius: 6rem;
+            overflow: hidden;
+            }
 
-                .searchContainer {
-                display: flex;
-                align-items: center;
-                padding: 10px;
-                border: 2px;
-                }
+            .searchContainer {
+            display: flex;
+            align-items: center;
+            padding: 0.2rem;
+            }
 
-                #topic {
-                position: relative;
-                flex: 1;
-                border: none;
-                font-size: 26px;
-                outline: none;
-                background-color: transparent;
-                color: black;
-                top: 8px;
-                left: 25px;
-                }
+            #topic {
+            position: relative;
+            flex: 1;
+            border: none;
+            font-size: 26px;
+            outline: none;
+            background-color: transparent;
+            color: black;
+            top:8px;
+            left: 25px;
+            }
 
-                .searchBtn {
-                position: relative;
-                background-color: transparent;
-                border: none;
-                font-size: 34px;
-                cursor: pointer;
-                outline: none;
-                top: 7px;
-                right: 45px;
-                }
-                .searchtitle{
-                    position: relative;
-                    left: 20px;
-                    text-align: left;
-                    font-weight: 530;
-                }
+            .searchBtn {
+            position: relative;
+            background-color: transparent;
+            border: none;
+            font-size: 34px;
+            cursor: pointer;
+            outline: none;
+            top: 7px;
+            right: 45px;
+            }
                 p{
                     color: white;
                 }
@@ -127,8 +117,10 @@
                     left: 20px;
                     height: 700px;
                 }
-
-
+                .part1{
+                    position: relative;
+                    top: 3.5rem;
+                }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -153,7 +145,6 @@
             <hr>
         </div>
         <div class="part1">
-            <h1>Database</h1>
             <div id="greenBox">
             <div id="searchBar">
                 <form method="POST" action="/searchResults">
