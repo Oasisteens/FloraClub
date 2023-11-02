@@ -19,6 +19,7 @@ const uploadmiddleware = uploadutils.middleware;
 
 const User = require('./models/user');
 const Post = require('./models/post');
+const Activity = require('./models/activity')
 const { curry } = require('lodash');
 
 
