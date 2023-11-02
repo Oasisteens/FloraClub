@@ -265,12 +265,23 @@
                     left: 20px;
                     height: 40%;
                 }
+
+                #page-container{
+                    display: hidden;
+                }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://kit.fontawesome.com/8394235f03.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+        window.onload = function() {
+        var contentContainer = document.getElementById('page-container');
+        contentContainer.style.display = 'block';
+}
+    </script>
     <body>
+        <div id="page-container">
         <div class="part1">
             <header>
                 <div id="topBar">
@@ -391,5 +402,6 @@
         <footer>
             <a href="https://beian.miit.gov.cn" target="_blank" class="beian">湘ICP备2023027594号-1</a>
         </footer>
+    </div>
     </body>
 </html>
