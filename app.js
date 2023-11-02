@@ -298,7 +298,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     } else{res.redirect('homescreen')}
   })
 
-  app.post('/searchResults', async (req, res) => {
+  app.post('/searchResults', attachUsername, async (req, res) => {
     const search = req.body.topic;
     const posts = await Post.find();
     const matchedPost = [];
@@ -311,12 +311,12 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
             matchedPost.push(post)
         }
     })
-    res.render('searchResults', { posts: matchedPost })
+    res.render('searchResults', { posts: matchedPost, username: req.username, admin: req.admin })
   })
 
-  app.get('/searchResults', async (req, res) => {
+  app.get('/searchResults', attachUsername, async (req, res) => {
     const posts = await Post.find();
-    res.render('searchResults', { posts: posts } )
+    res.render('searchResults', { posts: posts, username: req.username, admin: req.admin } )
   })
 
   app.post('/specificResults', async(req, res) => {

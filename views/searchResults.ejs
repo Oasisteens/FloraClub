@@ -94,9 +94,7 @@
             top: 7px;
             right: 45px;
             }
-                p{
-                    color: white;
-                }
+            
                 #greenBox{
                     border: black 1px;
                     background-color: #516d4e;
@@ -120,6 +118,32 @@
                     position: relative;
                     top: 3.5rem;
                 }
+                .results{
+                    background-color: white;
+                    margin-top: 8px;
+                    padding: 0;
+                    height: 4.3em;
+                }
+                .buttonForLinks{
+                    text-align: left;
+                   
+                    background-color: transparent;
+                    width: 140em;
+                    height: 5em;
+                    border: none;
+                }
+                .creatorP{
+                    position: relative;
+                    bottom: 2.5em;
+                    left: 0.5em;
+                    color: black;
+                }
+                .titleP{
+                    color: black;
+                    position: relative;
+                    bottom: 6em;
+                    left: 0.5em;
+                }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -136,7 +160,15 @@
                     <a class="linkBarLink" href="activities">Activities</a>
                     <a class="linkBarLink" href="journey">Journey</a>
                     <a class="linkBarLink" href="aboutUs">About us</a>
+                    <% if (username) { %>
+                        <% if (admin == true) { %>
+                            <a class=linkBarLink href="admin">Admin</a>
+                        <% } else { %>
+                            <p class="linkBarLink1"> Login Successful</p>
+                        <%}%>
+                   <% } else { %>
                     <a class="linkBarLink" href="login">Registration</a>
+                    <%}%>
                 </div>
             </div>
         </header>
@@ -160,9 +192,10 @@
                 <div class="results">
                 <form method="POST" action="specificResults">
                     <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
-                    <button><%=post.featuredColumnTitle%></button>
+                    <button class="buttonForLinks"></button>
                 </form>
-                <p>Creater: <%=post.username%></p>
+                <p class="creatorP">Creater: <%=post.username%></p>
+                <p class="titleP">Title: <%=post.featuredColumnTitle%></p>
                 </div>
             <% }) %>
             </div>
