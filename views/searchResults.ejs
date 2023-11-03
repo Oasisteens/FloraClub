@@ -108,7 +108,7 @@
                 #littleLessGreenBox{
                     border: black 1px;
                     background-color: #e0e8d5;
-                    padding: 20px 10px;
+                    padding: 40px 20px;
                     width: 96%;
                     position: relative;
                     left: 20px;
@@ -121,6 +121,7 @@
                 .results{
                     background-color: white;
                     margin-top: 8px;
+                    padding: 20px;
 
                     height: 4.3em;
                 }
@@ -134,12 +135,14 @@
                     bottom: 2.5em;
                     left: 0.5em;
                     color: black;
+                    pointer-events: none;
                 }
                 .titleP{
                     color: black;
                     position: relative;
                     bottom: 6em;
                     left: 0.5em;
+                    pointer-events: none;
                 }
         </style>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -185,16 +188,16 @@
             </div>
             </div>
             <div id="littleLessGreenBox">
-            <% posts.forEach((post) => { %>
-                <div class="results">
-                <form method="POST" action="specificResults">
-                    <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
-                    <button class="buttonForLinks"></button>
-                </form>
-                <p class="creatorP">Creater: <%=post.username%></p>
-                <p class="titleP">Title: <%=post.featuredColumnTitle%></p>
-                </div>
-            <% }) %>
+                <% posts.forEach((post) => { %>
+                    <div class="results">
+                        <form method="POST" action="specificResults">
+                            <input type="hidden" name="postTitle" value="<%=post.featuredColumnTitle%>">
+                            <button class="buttonForLinks"></button>
+                        </form>
+                        <p class="creatorP">Creater: <%=post.username%></p>
+                        <p class="titleP">Title: <%=post.featuredColumnTitle%></p>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </body>
