@@ -19,7 +19,8 @@ const uploadmiddleware = uploadutils.middleware;
 
 const User = require('./models/user');
 const Post = require('./models/post');
-const Activity = require('./models/activity')
+const Activity = require('./models/activity');
+const FeaturedPost = require('./models/featuredPost');
 const { curry } = require('lodash');
 
 
@@ -319,9 +320,9 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.render('searchResults', { posts: posts, username: req.username, admin: req.admin } )
   })
 
-  app.post('/specificResults', async(req, res) => {
+  app.post('/specificResults', attachUsername, async(req, res) => {
     const post = await Post.findOne({ featuredColumnTitle: req.body.postTitle })
-    res.render('specificResults', { post });
+    res.render('specificResults', { post, username: req.username, admin: req.admin });
   })
  
 
@@ -359,6 +360,24 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.render('creation')
   })
 
+app.post('/makeFeatured', async(req, res) => {
+    console.log(req.body.pictureUrl)
+    var pictures = 0
+    req.body.pictureUrl.forEach((pic) => {pictures++})
+    const featuredPost = new FeaturedPost({
+        featuredColumnTitle: req.body.featuredColumnTitle,
+        featuredColumnContent: req.body.featuredColumnContent,
+        featuredColumnCaptions: req.body.featuredColumnCaptions,
+        username: req.body.username,
+        pictures: pictures,
+        pictureUrl: req.body.pictureUrl
+    })
+    await featuredPost.save();
+    console.log('featured post saved');
+    console.log(featuredPost)
+  })
+
 app.use((req, res, next) => {
     res.status(404).render('404');
 })
+
