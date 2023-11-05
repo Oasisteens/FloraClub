@@ -7,8 +7,18 @@
         <h1><%= post.featuredColumnTitle %></h1>
         <p><%= post.featuredColumnContent %></p>
         <p><%= post.featuredColumnCaptions %></p>
-        <% post.pictureUrl.forEach(function(image) { %>                       
-            <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">                     
+        <form id="makeFeaturedForm" action="/makeFeatured" method="POST">
+        <% post.pictureUrl.forEach(function(image) { %> 
+            <img src="./uploads/<%= image.filename %>" alt="<%= image.filename %>">
+            <% if(admin == true){ %>
+                <input type="checkbox" name="pictureUrl" id="pictureUrl" value="./uploads/<%= image.filename %>">
+                <% }%>                     
         <% }); %>
+        <input type="hidden" id="featuredColumnTitle" name="featuredColumnTitle" value="<%= post.featuredColumnTitle%>">
+        <input type="hidden" id="featuredColumnContent" name="featuredColumnContent" value="<%= post.featuredColumnContent%>">
+        <input type="hidden" id="featuredColumnCaptions" name="featuredColumnCaptions" value="<%= post.featuredColumnCaptions%>">
+        <input type="hidden" id="username" name="username" value="<%=username%>">
+        <button>Make featured</button>
+        </form>
     </body>
 </html>

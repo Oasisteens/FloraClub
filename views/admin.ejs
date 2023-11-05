@@ -155,6 +155,27 @@
                     </tr>
                 <% }) %>
             </table>
+            <br>
+            <br>
+            <h1>Featured Posts</h1>
+            <table id="featuredPostTable">
+                <tr>
+                    <th>Topic</th>
+                    <th>Delete</th>
+                </tr>
+                <% featuredPosts.forEach(function(post) { %>
+                    <tr>
+                        <td><%= post.featuredColumnTitle %></td>
+                        <td>
+                            <form action="/deleteFeaturedPost" method="POST" id="deleteFeaturedPostForm">
+                                <input type="hidden" value="<%= post.id %>" name="featuredPostId">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+
+                    </tr>
+               <% }) %>
+            </table>
         </div>
     <br>
     <br>

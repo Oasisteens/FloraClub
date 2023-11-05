@@ -19,7 +19,8 @@ const uploadmiddleware = uploadutils.middleware;
 
 const User = require('./models/user');
 const Post = require('./models/post');
-const Activity = require('./models/activity')
+const Activity = require('./models/activity');
+const FeaturedPost = require('./models/featuredPost');
 const { curry } = require('lodash');
 
 
@@ -292,9 +293,10 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
 
     const users =  await User.find();
     const posts = await Post.find();
+    const featuredPosts = await FeaturedPost.find();
 
     if (req.user.admin == true) {
-        res.render('admin', { users, posts, username: req.user.username })
+        res.render('admin', { users, posts, username: req.user.username, featuredPosts })
     } else{res.redirect('homescreen')}
   })
 
@@ -319,9 +321,26 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.render('searchResults', { posts: posts, username: req.username, admin: req.admin } )
   })
 
-  app.post('/specificResults', async(req, res) => {
+  app.post('/specificResults', attachUsername, async(req, res) => {
     const post = await Post.findOne({ featuredColumnTitle: req.body.postTitle })
-    res.render('specificResults', { post });
+    res.render('specificResults', { post, username: req.username, admin: req.admin });
+  })
+
+  app.post('/makeFeatured', async(req, res) => {
+    var pictures = 0
+    req.body.pictureUrl.forEach((picture) => {pictures++})
+    console.log(req.body.pictureUrl)
+    const featuredPost = new FeaturedPost({
+        featuredColumnTitle: req.body.featuredColumnTitle,
+        featuredColumnContent: req.body.featuredColumnContent,
+        featuredColumnCaptions: req.body.featuredColumnCaptions,
+        username: req.body.username,
+        pictures: pictures,
+        pictureUrl: req.body.pictureUrl
+    })
+    await featuredPost.save();
+    console.log(featuredPost);
+    res.redirect('/searchResults')
   })
  
 
