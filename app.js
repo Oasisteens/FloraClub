@@ -145,7 +145,7 @@ app.get('/updateIndexprev', async (req, res) => {
     if (posts) {
     req.session.save(() => {
         const post = posts[req.session.currentIndex];
-    
+    if (post) {
         const html = `
         <div class="postlayout">
         ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
@@ -156,7 +156,7 @@ app.get('/updateIndexprev', async (req, res) => {
         </div>
         `;
     
-        res.json({ success: true, html });
+        res.json({ success: true, html });}
     });
 }
 });
