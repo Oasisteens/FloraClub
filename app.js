@@ -352,6 +352,14 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
     res.redirect('/admin')
   })
 
+  app.post('/deleteFeaturedPost', async (req, res) => {
+    console.log(req.body.featuredPostId)
+    featuredPostToDelete = FeaturedPost.findOne({_id: req.body.featuredPostId})
+    delete req.session.currentIndex
+    await FeaturedPost.deleteOne({ _id: req.body.featuredPostId })
+    res.redirect('/admin');
+  })
+
   app.post('/deleteUser', async (req, res) => {
     console.log('delete request');
     await User.deleteOne({ username: req.body.username });
