@@ -322,7 +322,7 @@ app.get('/homescreen', attachUsername, async (req, res) => {
 })
 
 app.get('/',checkAuthenticated, async (req, res) => {
-    res.render('index' , { username: req.user.username })
+    res.render('homescreen' , { username: req.user.username })
 })
 
 app.get('/activitiesUpload', checkAuthenticated, async (req, res) => {
