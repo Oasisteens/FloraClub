@@ -36,6 +36,10 @@
     height: 50px;
   }
 
+  .inputBox{
+    border: 1px solid black;
+  }
+
 </style>
       
     </style>
@@ -49,16 +53,16 @@
 
           <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
-              <input type="text" id="featuredColumnTitle" name="featuredColumnTitle" placeholder="Plant Name">
+              <input type="text" id="featuredColumnTitle" name="featuredColumnTitle" placeholder="Plant Name" class="inputBox">
               <br>
               <br>
-              <input type="text" id="featuredColumnContent" name="featuredColumnContent" placeholder="Content">
+              <input type="text" id="featuredColumnContent" name="featuredColumnContent" placeholder="Content" class="inputBox">
               <br>
               <br>
-              <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions" placeholder="Captions">
+              <input type="text" id="featuredColumnCaptions" name="featuredColumnCaptions" placeholder="Captions" class="inputBox">
               <br>
               <br>
-              <input type="file" name="files" id="input-files" class="form-control-file border" multiple>
+              <input type="file" name="files" id="input-files" class="form-control-file border" multiple class="inputBox">
               <br>
               <input type="hidden" id="username" name="username" value="<%= username %>">
             </div>
