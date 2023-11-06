@@ -150,17 +150,46 @@ app.get('/updateIndexprev', async (req, res) => {
     req.session.save(() => {
         const post = posts[req.session.currentIndex];
     if (post) {
-        const html = `
-        <div class="postlayout">
-        ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-        </div>
-        <div class="postcontents">
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-        </div>
-        `;
+        if(post.pictureUrl.length>1){
+            const html = `
+            <style>
+            img{
+                max-width: 350px;
+                height: auto;
+                padding: 40px;
+            }
+            </style>
+            <div class="postlayout">
+            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+            <div class="postcontents">
+                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            </div>
+            `;
+            res.json({ success: true, html });
+        }
+        else{
+            const html = `
+            <style>
+            img{
+                max-width: 550px;
+                height: auto;
+                padding: 40px;
+            }
+            </style>
+            <div class="postlayout">
+            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+            <div class="postcontents">
+                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            </div>
+            `;
+            res.json({ success: true, html });
+        }
     
-        res.json({ success: true, html });}
+        }
     });
 }
 });
@@ -178,18 +207,44 @@ app.get('/updateIndexnext', async (req, res) => {
 
 
     if (post) {
-    
-        const html = `
+        if(post.pictureUrl.length>1){
+            const html = `
+            <style>
+            img{
+                max-width: 350px;
+                height: auto;
+                padding: 40px;
+            }
+            </style>
             <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
                 <div class="featuredColumnContent">${post.featuredColumnContent}</div>
             </div>
-        `;
-    
-        res.json({ success: true, html });
+            `;
+            res.json({ success: true, html });
+        }
+        else{
+            const html = `
+            <style>
+            img{
+                max-width: 550px;
+                height: auto;
+                padding: 40px;
+            }
+            </style>
+            <div class="postlayout">
+            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            </div>
+            <div class="postcontents">
+                <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+            </div>
+            `;
+            res.json({ success: true, html });
+        }
     }
 });
 
@@ -199,17 +254,46 @@ app.get('/homescreensetup', async (req, res) => {
         const post = posts[currentIndex];
         if (post) {
     
-        const html = `
-        <div class="postlayout">
-        ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
-        </div>
-        <div class="postcontents">
-            <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
-            <div class="featuredColumnContent">${post.featuredColumnContent}</div>
-        </div>
-        `;
+            if(post.pictureUrl.length>1){
+                const html = `
+                <style>
+                img{
+                    max-width: 350px;
+                    height: auto;
+                    padding: 40px;
+                }
+                </style>
+                <div class="postlayout">
+                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+                </div>
+                <div class="postcontents">
+                    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+                </div>
+                `;
+                res.json({ success: true, html })
+            }
+            else{
+                const html = `
+                <style>
+                img{
+                    max-width: 550px;
+                    height: auto;
+                    padding: 40px;
+                }
+                </style>
+                <div class="postlayout">
+                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+                </div>
+                <div class="postcontents">
+                    <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
+                    <div class="featuredColumnContent">${post.featuredColumnContent}</div>
+                </div>
+                `;
+                res.json({ success: true, html })
+            }
     
-        res.json({ success: true, html })};
+    };
 });
 
 
