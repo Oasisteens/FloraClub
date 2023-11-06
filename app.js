@@ -321,8 +321,11 @@ app.get('/homescreen', attachUsername, async (req, res) => {
     res.render('homescreen', {posts, username: req.username, admin: req.admin, recordedPlantsNum})
 })
 
-app.get('/',checkAuthenticated, async (req, res) => {
-    res.render('homescreen' , { username: req.user.username })
+app.get('/', attachUsername, async (req, res) => {
+    const posts = await Post.find({featured: true})
+    let recordedPlantsNum = 0
+    posts.forEach((post) => {recordedPlantsNum++})
+    res.render('homescreen', {posts, username: req.username, admin: req.admin, recordedPlantsNum})
 })
 
 app.get('/activitiesUpload', checkAuthenticated, async (req, res) => {

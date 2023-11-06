@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Activities Upload</title>
     <style>
+      body, h1, p {
+                font-family: 'poppins',sans-serif;
+                overflow-x: hidden;
+                font-size: 1.25rem;
+            }
       div.preview-images > img {
         width: 30%;
       }
@@ -20,6 +25,7 @@
         color: white;
         background-color: #11770a;
         border: white;
+        border-radius: 20px;
         padding: 7px;
       }
 
@@ -27,8 +33,58 @@
   #featuredColumnContent,
   #featuredColumnCaptions {
     width: 700px;
-    height: 30px;
+    height: 50px;
   }
+
+  .inputBox{
+    border: 1px solid black;
+  }
+  #topbar{
+                display: inline-block;
+                display: flex;
+            }
+            .links{
+                display: flex;
+                position: absolute;
+                top: 35px;
+                right: 40px;
+                padding: 8px;
+                background-color: #e2e8d1;
+                border: 2px solid transparent;
+                border-radius: 10px;
+            }
+            a {
+                display: inline-block;
+                border: 1px solid transparent;
+                padding: 5px 10px;
+                margin: 0;
+            }
+
+            .linkBarLink{
+                color: #7a9a6d;
+                font-size: 20px;
+                text-decoration: none;
+            }
+            .linkBarLink:hover{
+                color: #639c4c;
+                background-color: #7a9a6d77;
+                border-radius: 10px;
+                border: 1px solid transparent;
+                font-size: 20px;
+                text-decoration: none;
+            }
+            footer{
+                background-color: rgb(133, 132, 132);
+                text-align: center;
+                position: relative;
+                margin-left: -10;
+                margin-right: -10;
+            }
+            .beian{
+                text-decoration: none;
+                color: black;
+                font-size: 20px;
+            }
 
 </style>
       
@@ -36,6 +92,20 @@
   </head>
 
   <body>
+    <header>
+      <div id="topBar">
+          <h1 class="title" style="font-size: 44px;">BIPH FLORA</h1>
+          <div class="links">
+              <a class="linkBarLink" href="homescreen">Home</a>
+              <a class="linkBarLink" href="searchResults">Database</a>
+              <a class="linkBarLink" href="creation">Creation</a>
+              <a class="linkBarLink" href="activities">Activities</a>
+              <a class="linkBarLink" href="journey">Journey</a>
+              <a class="linkBarLink" href="aboutUs">About us</a>
+              <a class="linkBarLink" href="admin">Admin</a>
+          </div>
+      </div>
+  </header>
     <div class="container">
       <div class="row">
         <div class="col-sm-8mt-3">
@@ -92,5 +162,8 @@
       });
     </script>
 <!--javascript for previewing the picture-->
+<footer>
+  <a href="https://beian.miit.gov.cn" target="_blank" class="beian">湘ICP备2023027594号-1</a>
+</footer>
   </body>
 </html>
