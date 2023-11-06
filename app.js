@@ -7,6 +7,7 @@ const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
 const app = express();
 const natural = require('natural');
+const bodyParser = require('body-parser');
 
 const levenshteinDistance = natural.LevenshteinDistance;
  
@@ -27,6 +28,9 @@ const { curry } = require('lodash');
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
@@ -328,7 +332,7 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
 
   app.post('/makeFeatured', async(req, res) => {
     var pictures = 0
-    req.body.pictureUrl.forEach((picture) => {pictures++})
+    if (Array.isArray(req.body.pictureUrl)) {pictures++} else {pictures = 1}
     console.log(req.body.pictureUrl)
     const featuredPost = new FeaturedPost({
         featuredColumnTitle: req.body.featuredColumnTitle,
