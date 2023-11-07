@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #ffffff; /* Set the body background color to white */
+      margin: 0; /* Remove default margin */
+      padding: 0; /* Remove default padding */
+    }
+
+    .loading {
+      position: fixed; /* Use fixed position to cover the entire body */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2a9d8f; /* Set the loading bar's background color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; /* Align content vertically */
+      z-index: 9999;
+    }
+
+    .progress {
+      position: relative;
+      height: 10px;
+      width: 300px; /* Adjust the width as needed */
+      border: 1px solid #f4a261;
+      border-radius: 15px;
+    }
+
+    .progress .color {
+      position: absolute;
+      background-color: #ffffff;
+      width: 0px;
+      height: 10px;
+      border-radius: 15px;
+      animation: progress 2s infinite linear;
+    }
+
+    @keyframes progress {
+      0% {
+        width: 0%;
+      }
+      25% {
+        width: 50%;
+      }
+      50% {
+        width: 75%;
+      }
+      75% {
+        width: 85%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    .hidden {
+      display: none; /* Hide the element */
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">
+    <div class="progress" id="progress">
+      <div class="color"></div>
+    </div>
+    <h1 class="hidden" id="content">this</h1> <!-- Initially hide the <h1> element -->
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      var loadingScreen = document.getElementById('loading');
+      var content = document.getElementById('content');
+
+      // Prevent user interaction while loading
+      document.body.classList.add('loading');
+
+      // Simulate a 2-second loading time delay
+      setTimeout(function() {
+        loadingScreen.style.display = 'none'; // Hide the loading screen
+        content.classList.remove('hidden'); // Show the content
+
+        // Enable user interaction after loading
+        document.body.classList.remove('loading');
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
