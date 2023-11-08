@@ -5,6 +5,7 @@ const MongoClient = mongodb.MongoClient;
 const ObjectId = mongodb.ObjectId;
 const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
+const imageCompressor = require('./models/compression');
 const app = express();
 const natural = require('natural');
 const bodyParser = require('body-parser');
@@ -160,7 +161,7 @@ app.get('/updateIndexprev', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -179,7 +180,7 @@ app.get('/updateIndexprev', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -217,7 +218,7 @@ app.get('/updateIndexnext', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -236,7 +237,7 @@ app.get('/updateIndexnext', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -264,7 +265,7 @@ app.get('/homescreensetup', async (req, res) => {
                 }
                 </style>
                 <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+                ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
                 </div>
                 <div class="postcontents">
                     <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -283,7 +284,7 @@ app.get('/homescreensetup', async (req, res) => {
                 }
                 </style>
                 <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./uploads/${image.filename}" alt="${image.filename}">`).join('')}
+                ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
                 </div>
                 <div class="postcontents">
                     <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -340,6 +341,8 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
   
     // Retrieve the file numbers
     const fileNumbers = uploadutils.getFileCount();
+    const inputFiles = [];
+    const outputFolderPath = './public/plantspic/';
   
     if (req.body.featured == null || req.body.featured == false) {
       var isFeatured = false;
@@ -365,8 +368,10 @@ app.post('/upload', uploadmiddleware, async function (req, res) {
             path: file.path,
             size: file.size
           });
+          inputFiles.push('./public/uploads/'+file.filename);
         });
       }
+      imageCompressor.compressImages(inputFiles,outputFolderPath);
 
     await post.save();
     console.log(post.pictures)
