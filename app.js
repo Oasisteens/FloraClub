@@ -161,7 +161,7 @@ app.get('/updateIndexprev', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -180,7 +180,7 @@ app.get('/updateIndexprev', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -218,7 +218,7 @@ app.get('/updateIndexnext', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -237,7 +237,7 @@ app.get('/updateIndexnext', async (req, res) => {
             }
             </style>
             <div class="postlayout">
-            ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+            ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
             </div>
             <div class="postcontents">
                 <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -265,7 +265,7 @@ app.get('/homescreensetup', async (req, res) => {
                 }
                 </style>
                 <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+                ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
                 </div>
                 <div class="postcontents">
                     <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
@@ -284,7 +284,7 @@ app.get('/homescreensetup', async (req, res) => {
                 }
                 </style>
                 <div class="postlayout">
-                ${post.pictureUrl.map(image => `<img src="./public/plantspic/${image.filename}" alt="${image.filename}">`).join('')}
+                ${post.pictureUrl.map(image => `<img src="./plantspic/${image.filename}" alt="${image.filename}">`).join('')}
                 </div>
                 <div class="postcontents">
                     <div class="featuredColumnTitle">${post.featuredColumnTitle}</div>
