@@ -11,11 +11,11 @@ function compressImages(inputFiles, outputFolderPath) {
     let compressImage;
 
     if (ext === '.jpg' || ext === '.jpeg') {
-      compressImage = () => sharp(inputFile).jpeg({ quality: 40 }).toBuffer();
+      compressImage = () => sharp(inputFile).jpeg({ quality: 10 }).toBuffer();
     } else if (ext === '.webp') {
-      compressImage = () => sharp(inputFile).webp({ quality: 40, lossless: false }).toBuffer();
+      compressImage = () => sharp(inputFile).webp({ quality: 10, lossless: false }).toBuffer();
     } else if (ext === '.png') {
-      compressImage = () => sharp(inputFile).png({ compressionLevel: 3 }).toBuffer();
+      compressImage = () => sharp(inputFile).png({ quality: 10, lossless: false }).toBuffer();
     } else {
       console.error(`Invalid format for input image "${inputFile}", only PNG, JPG/JPEG, or WEBP are supported. Skipping this file.`);
       return;
