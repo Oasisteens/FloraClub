@@ -5,7 +5,7 @@ const MongoClient = mongodb.MongoClient;
 const ObjectId = mongodb.ObjectId;
 const dbConfig = require("./config/db");
 const uploadutils = require("./models/uploadfile");
-// const imageCompressor = require('./models/compression');
+const imageCompressor = require('./models/compression');
 const app = express();
 const natural = require('natural');
 const bodyParser = require('body-parser');
@@ -76,7 +76,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('view engine', 'ejs');
-app.listen(3001, '0.0.0.0', () => {
+app.listen(3000, '0.0.0.0', () => {
     console.log(`Server is running on http`);
 });
 
@@ -337,47 +337,47 @@ app.get('/index',checkAuthenticated, async (req,res) =>{
     res.render('index' , { username: req.user.username });
 })
 
-// app.post('/upload', uploadmiddleware, async function (req, res) {
+app.post('/upload', uploadmiddleware, async function (req, res) {
   
-//     // Retrieve the file numbers
-//     const fileNumbers = uploadutils.getFileCount();
-//     const inputFiles = [];
-//     const outputFolderPath = './public/plantspic/';
+    // Retrieve the file numbers
+    const fileNumbers = uploadutils.getFileCount();
+    const inputFiles = [];
+    const outputFolderPath = './public/plantspic/';
   
-//     if (req.body.featured == null || req.body.featured == false) {
-//       var isFeatured = false;
-//     } else {
-//       var isFeatured = true;
-//     }
+    if (req.body.featured == null || req.body.featured == false) {
+      var isFeatured = false;
+    } else {
+      var isFeatured = true;
+    }
   
-//     const post = new Post({
-//       featuredColumnTitle: req.body.featuredColumnTitle,
-//       featuredColumnContent: req.body.featuredColumnContent,
-//       featuredColumnCaptions: req.body.featuredColumnCaptions,
-//       username: req.body.username,
-//       featured: isFeatured,
-//       pictures: fileNumbers,
-//       pictureUrl: []
-//     });
+    const post = new Post({
+      featuredColumnTitle: req.body.featuredColumnTitle,
+      featuredColumnContent: req.body.featuredColumnContent,
+      featuredColumnCaptions: req.body.featuredColumnCaptions,
+      username: req.body.username,
+      featured: isFeatured,
+      pictures: fileNumbers,
+      pictureUrl: []
+    });
   
-//     if (req.files && req.files.length >= 1) {
-//         req.files.forEach(function (file) {
-//           post.pictureUrl.push({
-//             filename: file.filename,
-//             originalname: file.originalname,
-//             path: file.path,
-//             size: file.size
-//           });
-//           inputFiles.push('./public/uploads/'+file.filename);
-//         });
-//       }
-//       imageCompressor.compressImages(inputFiles,outputFolderPath);
+    if (req.files && req.files.length >= 1) {
+        req.files.forEach(function (file) {
+          post.pictureUrl.push({
+            filename: file.filename,
+            originalname: file.originalname,
+            path: file.path,
+            size: file.size
+          });
+          inputFiles.push('./public/uploads/'+file.filename);
+        });
+      }
+      imageCompressor.compressImages(inputFiles,outputFolderPath);
 
-//     await post.save();
-//     console.log(post.pictures)
+    await post.save();
+    console.log(post.pictures)
   
-//     res.render('index', { username: req.body.username });
-//   });
+    res.render('index', { username: req.body.username });
+  });
 
 
 
